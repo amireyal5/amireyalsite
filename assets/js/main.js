@@ -117,7 +117,6 @@ function initApp() {
             if (linkFile === currentFile) {
                 link.parentElement.classList.add('current-menu-item');
             } else if ((currentFile === '' || currentFile === 'index.html') && (linkFile === 'index.html')) {
-                // This handles the case where the user is on the root path ('/' or '/index.html')
                 link.parentElement.classList.add('current-menu-item');
             }
         }
@@ -176,7 +175,8 @@ function initBlogFilter() {
                 if (terms.includes(filterTerm)) {
                     post.style.display = 'flex';
                     hasVisiblePost = true;
-                } else {
+                }
+                else {
                     post.style.display = 'none';
                 }
             });
