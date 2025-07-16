@@ -1,7 +1,7 @@
 function initApp() {
     // Accordion functionality
     const accordionItems = document.querySelectorAll<HTMLElement>('.fl-accordion-item');
-    accordionItems.forEach(clickedItem => {
+ const accordionItems = Array.from(document.querySelectorAll<HTMLElement>('.fl-accordion-item'));
         const button = clickedItem.querySelector<HTMLElement>('.fl-accordion-button');
         if (button) {
             button.addEventListener('click', () => {
