@@ -441,11 +441,13 @@ h2.fl-heading .fl-heading-text {
     text-align: center;
 }
 
-.intro-image-col img {
+/* Added rule to target the specific class name from your HTML for the profile image */
+.intro-image-col img,
+.amireyal_profile\.webp img { /* שימו לב ל-`\.` כדי לברוח מנקודה בשם המחלקה */
     width: 220px;
     height: 220px;
     object-fit: cover;
-    border-radius: 50%; /* This rule makes the image round */
+    border-radius: 50%; /* זהו הכלל שהופך את התמונה לעגולה */
     border: 5px solid #fff;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
