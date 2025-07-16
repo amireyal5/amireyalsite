@@ -1,7 +1,8 @@
 function initApp() {
     // Accordion functionality
-    const accordionItems = document.querySelectorAll<HTMLElement>('.fl-accordion-item');
- const accordionItems = Array.from(document.querySelectorAll<HTMLElement>('.fl-accordion-item'));
+    const accordionItems = Array.from(document.querySelectorAll<HTMLElement>('.fl-accordion-item')); // זו השורה הנכונה היחידה!
+
+    accordionItems.forEach(clickedItem => { // שים לב שה-forEach הוא על המשתנה הזה
         const button = clickedItem.querySelector<HTMLElement>('.fl-accordion-button');
         if (button) {
             button.addEventListener('click', () => {
@@ -46,7 +47,7 @@ function initApp() {
         if (navCollapse) {
             navCollapse.classList.add('in');
             navCollapse.setAttribute('aria-hidden', 'false');
-            navCollapse.removeAttribute('inert'); // Added for accessibility
+            navCollapse.removeAttribute('inert');
         }
         document.body.classList.add('nav-open');
         if (navbarToggle) {
@@ -59,7 +60,7 @@ function initApp() {
         if (navCollapse) {
             navCollapse.classList.remove('in');
             navCollapse.setAttribute('aria-hidden', 'true');
-            navCollapse.setAttribute('inert', ''); // Added for accessibility
+            navCollapse.setAttribute('inert', '');
         }
         document.body.classList.remove('nav-open');
         if (navbarToggle) {
