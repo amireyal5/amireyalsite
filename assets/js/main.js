@@ -1,23 +1,22 @@
 function initApp() {
-    console.log("initApp() is running!"); // וודא שהפונקציה הזו נקראת
+    console.log("initApp() is running!");
 
     // Accordion functionality
-    const accordionItems = Array.from(document.querySelectorAll<HTMLElement>('.fl-accordion-item'));
-    console.log("Found accordion items:", accordionItems.length, accordionItems); // בדוק כמה אקורדיונים נמצאו ותדפיס אותם
+    const accordionItems = Array.from(document.querySelectorAll('.fl-accordion-item'));
+    console.log("Found accordion items:", accordionItems.length, accordionItems);
 
-    // ***** החלק שהיה חסר בטעות, ועכשיו חזר *****
     accordionItems.forEach(clickedItem => {
-        const button = clickedItem.querySelector<HTMLElement>('.fl-accordion-button');
+        const button = clickedItem.querySelector('.fl-accordion-button');
         if (button) {
             button.addEventListener('click', () => {
-                console.log("Accordion button clicked!"); // בדוק אם הלחיצה נרשמת
+                console.log("Accordion button clicked!");
                 const wasActive = clickedItem.classList.contains('fl-accordion-item-active');
 
                 // Close all items
                 accordionItems.forEach(item => {
                     item.classList.remove('fl-accordion-item-active');
-                    const content = item.querySelector<HTMLElement>('.fl-accordion-content');
-                    const icon = item.querySelector<HTMLElement>('.fl-accordion-button-icon');
+                    const content = item.querySelector('.fl-accordion-content');
+                    const icon = item.querySelector('.fl-accordion-button-icon');
                     if (content) {
                         content.style.maxHeight = null;
                     }
@@ -30,8 +29,8 @@ function initApp() {
                 // If the clicked item wasn't active, open it.
                 if (!wasActive) {
                     clickedItem.classList.add('fl-accordion-item-active');
-                    const content = clickedItem.querySelector<HTMLElement>('.fl-accordion-content');
-                    const icon = clickedItem.querySelector<HTMLElement>('.fl-accordion-button-icon');
+                    const content = clickedItem.querySelector('.fl-accordion-content');
+                    const icon = clickedItem.querySelector('.fl-accordion-button-icon');
                     if (content) {
                         content.style.maxHeight = content.scrollHeight + 'px';
                     }
@@ -43,47 +42,46 @@ function initApp() {
             });
         }
     });
-    // ***********************************************
 
     // Mobile navigation toggle
-    const navbarToggle = document.querySelector<HTMLElement>('.navbar-toggle');
-    const navCollapse = document.querySelector<HTMLElement>('.fl-page-nav-collapse');
-    console.log("Navbar Toggle found:", !!navbarToggle, navbarToggle); // בדוק אם כפתור ההמבורגר נמצא
-    console.log("Nav Collapse found:", !!navCollapse, navCollapse); // בדוק אם תפריט הניווט נמצא
+    const navbarToggle = document.querySelector('.navbar-toggle');
+    const navCollapse = document.querySelector('.fl-page-nav-collapse');
+    console.log("Navbar Toggle found:", !!navbarToggle, navbarToggle);
+    console.log("Nav Collapse found:", !!navCollapse, navCollapse);
 
     const openNav = () => {
-        console.log("openNav() called. Current navCollapse classes:", navCollapse?.classList.value); // בדוק כיתות לפני הפתיחה
+        console.log("openNav() called. Current navCollapse classes:", navCollapse?.classList.value);
         if (navCollapse) {
             navCollapse.classList.add('in');
             navCollapse.setAttribute('aria-hidden', 'false');
-            navCollapse.removeAttribute('inert'); // Added for accessibility
+            navCollapse.removeAttribute('inert');
         }
         document.body.classList.add('nav-open');
         if (navbarToggle) {
             navbarToggle.setAttribute('aria-expanded', 'true');
             navbarToggle.classList.add('is-active');
         }
-        console.log("openNav() finished. New navCollapse classes:", navCollapse?.classList.value); // בדוק כיתות אחרי הפתיחה
+        console.log("openNav() finished. New navCollapse classes:", navCollapse?.classList.value);
     };
 
     const closeNav = () => {
-        console.log("closeNav() called. Current navCollapse classes:", navCollapse?.classList.value); // בדוק כיתות לפני הסגירה
+        console.log("closeNav() called. Current navCollapse classes:", navCollapse?.classList.value);
         if (navCollapse) {
             navCollapse.classList.remove('in');
             navCollapse.setAttribute('aria-hidden', 'true');
-            navCollapse.setAttribute('inert', ''); // Added for accessibility
+            navCollapse.setAttribute('inert', '');
         }
         document.body.classList.remove('nav-open');
         if (navbarToggle) {
             navbarToggle.setAttribute('aria-expanded', 'false');
             navbarToggle.classList.remove('is-active');
         }
-        console.log("closeNav() finished. New navCollapse classes:", navCollapse?.classList.value); // בדוק כיתות אחרי הסגירה
+        console.log("closeNav() finished. New navCollapse classes:", navCollapse?.classList.value);
     };
 
     if (navbarToggle && navCollapse) {
         navbarToggle.addEventListener('click', () => {
-            console.log("Navbar toggle clicked! Checking navCollapse 'in' class:", navCollapse.classList.contains('in')); // בדוק מצב "in" בלחיצה
+            console.log("Navbar toggle clicked! Checking navCollapse 'in' class:", navCollapse.classList.contains('in'));
             if (navCollapse.classList.contains('in')) {
                 closeNav();
             } else {
@@ -109,7 +107,7 @@ function initApp() {
 
     // Set active nav link
     const currentFile = window.location.pathname.split('/').pop() || 'index.html';
-    const navLinks = document.querySelectorAll<HTMLAnchorElement>('.fl-page-nav .nav-link');
+    const navLinks = document.querySelectorAll('.fl-page-nav .nav-link');
 
     navLinks.forEach(link => {
         const linkFile = link.getAttribute('href');
@@ -127,8 +125,8 @@ function initApp() {
 }
 
 function initBlogFilter() {
-    console.log("initBlogFilter() is running!"); // וודא שהפונקציה הזו נקראת
-    const postsContainer = document.querySelector<HTMLElement>('.blog-post-list-container');
+    console.log("initBlogFilter() is running!");
+    const postsContainer = document.querySelector('.blog-post-list-container');
     if (!postsContainer) {
         console.log("No .blog-post-list-container found. Skipping blog filter.");
         return;
@@ -139,8 +137,8 @@ function initBlogFilter() {
     filterStatusContainer.className = 'blog-filter-status';
     postsContainer.parentNode?.insertBefore(filterStatusContainer, postsContainer);
 
-    const posts = Array.from(postsContainer.querySelectorAll<HTMLElement>('.blog-post-item'));
-    const sidebarLinks = document.querySelectorAll<HTMLAnchorElement>('.blog-sidebar a');
+    const posts = Array.from(postsContainer.querySelectorAll('.blog-post-item'));
+    const sidebarLinks = document.querySelectorAll('.blog-sidebar a');
 
     const filterPosts = () => {
         const hash = window.location.hash;
@@ -162,14 +160,13 @@ function initBlogFilter() {
                 return;
             }
 
-            const activeLink = document.querySelector<HTMLAnchorElement>(`.blog-sidebar a[href$="${hash}"]`);
+            const activeLink = document.querySelector(`.blog-sidebar a[href$="${hash}"]`);
             if(activeLink) activeLink.classList.add('active-filter');
-            // כאן הייתה הבעיה - חסר סיום לטקסט ול-template literal
-            const typeText = filterType === 'category' ? 'קטגוריה' : 'תגית'; // תיקון כאן
+            const typeText = filterType === 'category' ? 'קטגוריה' : 'תגית';
             filterStatusContainer.innerHTML = `
                 <h2>מציג מאמרים ב${typeText}: ${filterTerm}</h2>
                 <a href="approach.html" class="clear-filter-btn">נקה סינון והצג הכל</a>
-            `; 
+            `;
 
             let hasVisiblePost = false;
             posts.forEach(post => {
@@ -195,12 +192,12 @@ function initBlogFilter() {
     };
 
     window.addEventListener('hashchange', filterPosts);
-    filterPosts(); 
+    filterPosts();
 }
 
 // Call initApp and initBlogFilter when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("DOM Content Loaded event fired!"); 
+    console.log("DOM Content Loaded event fired!");
     initApp();
     initBlogFilter();
 });
