@@ -1,15 +1,15 @@
 /* Reset & General Setup */
 :root {
-    /* Updated Color Palette: "ארצית ומרגיעה" */
-    --primary-color: #2D4B2D; /* ירוק כהה עמוק - לאלמנטים ראשיים, כותרות */
-    --secondary-color: #8B8C7A; /* חום אפרפר / חום-ירוק - לאלמנטים משניים, קישורים */
-    --accent-color: #BB764C; /* כתום-חלודה / חום-אדמדם - לכפתורי קריאה לפעולה, הדגשות */
-    --text-color: #5C5C5C; /* אפור-חום כהה - לטקסט רגיל */
+    /* Updated Color Palette: "מודרנית ונקייה" */
+    --primary-color: #34495E; /* כחול-אפור כהה - לאלמנטים ראשיים, כותרות */
+    --secondary-color: #95A5A6; /* אפור בהיר-בינוני - לאלמנטים משניים, קישורים */
+    --accent-color: #2ECC71; /* ירוק בהיר תוסס - לכפתורי קריאה לפעולה, הדגשות */
+    --text-color: #2C3E50; /* כחול כהה מאוד - לטקסט רגיל */
     --light-text-color: #fff; /* לבן - לטקסט על רקעים כהים */
-    --background-color: #F8F6F4; /* קרם בהיר / לבן מלוכלך - לרקע ראשי */
+    --background-color: #ECF0F1; /* אפור בהיר מאוד / לבן כמעט - לרקע ראשי */
     --light-background-color: #FFFFFF; /* לבן נקי לרקעים של כרטיסים/אקורדיון */
 
-    /* New variables mapped to the "ארצית ומרגיעה" palette */
+    /* New variables mapped to the "מודרנית ונקייה" palette */
     --contrast-color: var(--primary-color); /* ממופה לצבע ראשי */
     --heading-color: var(--primary-color); /* ממופה לצבע ראשי */
     --light-accent-bg: color-mix(in srgb, var(--background-color) 95%, black); /* רקע בהיר יותר, נגזר מהרקע הראשי */
@@ -48,7 +48,7 @@ a {
 }
 a:hover {
     text-decoration: underline;
-    color: var(--primary-color); /* ירוק כהה יותר בריחוף */
+    color: var(--primary-color); /* כחול-אפור כהה יותר בריחוף */
 }
 a:active, a:hover {
     outline: 0;
@@ -500,15 +500,13 @@ h2.fl-heading .fl-heading-text {
 
 /* Home - Services Overview */
 .services-cards-container {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
+    display: grid; /* שינוי לפריסת גריד */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 3 עמודות רספונסיביות */
+    gap: 30px; /* שמירת רווח קיים */
+    justify-content: center; /* שמירה על יישור למרכז אם אין מספיק פריטים למילוי שורה */
 }
 .service-card {
-    flex: 1;
-    min-width: 280px;
-    max-width: 350px;
+    /* הסרת כללי flex: 1, min-width, max-width שנוגדים את הגריד */
     text-align: center;
     padding: 30px 20px;
     border: 1px solid var(--border-color);
@@ -524,10 +522,11 @@ h2.fl-heading .fl-heading-text {
     box-shadow: var(--shadow-medium); /* צל עמוק יותר בריחוף */
 }
 .service-card img {
-    max-width: 80px;
-    height: 80px;
+    max-width: 100%; /* התמונה תמלא את רוחב הכרטיס */
+    height: 120px; /* גובה קבוע שנועד לייצג כשליש מגובה כרטיס ממוצע */
+    object-fit: cover; /* התמונה תכסה את כל השטח המוקצה */
     margin: 0 auto 15px auto;
-    object-fit: contain;
+    display: block; /* לוודא שהתמונה מתנהגת כבלוק */
 }
 .service-card h3 {
     color: var(--heading-color);
@@ -584,16 +583,14 @@ h2.fl-heading .fl-heading-text {
 }
 
 .audience-cards-container {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
+    display: grid; /* שינוי לפריסת גריד */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 3 עמודות רספונסיביות */
+    gap: 30px; /* שמירת רווח קיים */
+    justify-content: center; /* שמירה על יישור למרכז אם אין מספיק פריטים למילוי שורה */
 }
 
 .audience-card {
-    flex: 1;
-    min-width: 280px;
-    max-width: 350px;
+    /* הסרת כללי flex: 1, min-width, max-width שנוגדים את הגריד */
     padding: 30px 25px;
     border: 1px solid var(--border-color);
     border-radius: 8px; /* פינות מעוגלות יותר */
@@ -1007,6 +1004,7 @@ h2.fl-heading .fl-heading-text {
     color: color-mix(in srgb, var(--light-text-color) 80%, black); /* טקסט פוטר בהיר יותר */
     padding: 50px 0 20px 0;
     text-align: center;
+    margin-top: 80px; /* רווח מה-CTA */
 }
 .footer-cta {
     font-size: 1.5rem;
