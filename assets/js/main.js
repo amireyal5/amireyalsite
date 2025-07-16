@@ -164,5 +164,43 @@ function initBlogFilter() {
 
             const activeLink = document.querySelector<HTMLAnchorElement>(`.blog-sidebar a[href$="${hash}"]`);
             if(activeLink) activeLink.classList.add('active-filter');
+            // כאן הייתה הבעיה - חסר סיום לטקסט ול-template literal
+            const typeText = filterType === 'category' ? 'קטגוריה' : 'תגית'; // תיקון כאן
+            filterStatusContainer.innerHTML = `
+                <h2>מציג מאמרים ב${typeText}: ${filterTerm}</h2>
+                <a href="approach.html" class="clear-filter-btn">נקה סינון והצג הכל</a>
+            `; 
 
-            const typeText = filterType === 'category' ? 'קטגוריה' : 'ת
+            let hasVisiblePost = false;
+            posts.forEach(post => {
+                const dataAttribute = filterType === 'category' ? post.dataset.categories : post.dataset.tags;
+                const terms = dataAttribute ? dataAttribute.split(',').map(t => t.trim()) : [];
+
+                if (terms.includes(filterTerm)) {
+                    post.style.display = 'flex';
+                    hasVisiblePost = true;
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+
+            if (!hasVisiblePost) {
+                filterStatusContainer.innerHTML += `<p>לא נמצאו מאמרים התואמים את הסינון.</p>`;
+            }
+
+        } catch (e) {
+            console.error("Error decoding hash or filtering posts:", e);
+            posts.forEach(post => post.style.display = 'flex');
+        }
+    };
+
+    window.addEventListener('hashchange', filterPosts);
+    filterPosts(); 
+}
+
+// Call initApp and initBlogFilter when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("DOM Content Loaded event fired!"); 
+    initApp();
+    initBlogFilter();
+});
