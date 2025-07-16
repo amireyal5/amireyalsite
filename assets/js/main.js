@@ -1,10 +1,16 @@
 function initApp() {
+    console.log("initApp() is running!"); // וודא שהפונקציה הזו נקראת
+
     // Accordion functionality
     const accordionItems = Array.from(document.querySelectorAll<HTMLElement>('.fl-accordion-item'));
+    console.log("Found accordion items:", accordionItems.length, accordionItems); // בדוק כמה אקורדיונים נמצאו ותדפיס אותם
+
+    // ***** החלק שהיה חסר בטעות, ועכשיו חזר *****
     accordionItems.forEach(clickedItem => {
         const button = clickedItem.querySelector<HTMLElement>('.fl-accordion-button');
         if (button) {
             button.addEventListener('click', () => {
+                console.log("Accordion button clicked!"); // בדוק אם הלחיצה נרשמת
                 const wasActive = clickedItem.classList.contains('fl-accordion-item-active');
 
                 // Close all items
@@ -37,12 +43,16 @@ function initApp() {
             });
         }
     });
+    // ***********************************************
 
     // Mobile navigation toggle
     const navbarToggle = document.querySelector<HTMLElement>('.navbar-toggle');
     const navCollapse = document.querySelector<HTMLElement>('.fl-page-nav-collapse');
+    console.log("Navbar Toggle found:", !!navbarToggle, navbarToggle); // בדוק אם כפתור ההמבורגר נמצא
+    console.log("Nav Collapse found:", !!navCollapse, navCollapse); // בדוק אם תפריט הניווט נמצא
 
     const openNav = () => {
+        console.log("openNav() called. Current navCollapse classes:", navCollapse?.classList.value); // בדוק כיתות לפני הפתיחה
         if (navCollapse) {
             navCollapse.classList.add('in');
             navCollapse.setAttribute('aria-hidden', 'false');
@@ -53,9 +63,11 @@ function initApp() {
             navbarToggle.setAttribute('aria-expanded', 'true');
             navbarToggle.classList.add('is-active');
         }
+        console.log("openNav() finished. New navCollapse classes:", navCollapse?.classList.value); // בדוק כיתות אחרי הפתיחה
     };
 
     const closeNav = () => {
+        console.log("closeNav() called. Current navCollapse classes:", navCollapse?.classList.value); // בדוק כיתות לפני הסגירה
         if (navCollapse) {
             navCollapse.classList.remove('in');
             navCollapse.setAttribute('aria-hidden', 'true');
@@ -66,10 +78,12 @@ function initApp() {
             navbarToggle.setAttribute('aria-expanded', 'false');
             navbarToggle.classList.remove('is-active');
         }
+        console.log("closeNav() finished. New navCollapse classes:", navCollapse?.classList.value); // בדוק כיתות אחרי הסגירה
     };
 
     if (navbarToggle && navCollapse) {
         navbarToggle.addEventListener('click', () => {
+            console.log("Navbar toggle clicked! Checking navCollapse 'in' class:", navCollapse.classList.contains('in')); // בדוק מצב "in" בלחיצה
             if (navCollapse.classList.contains('in')) {
                 closeNav();
             } else {
@@ -113,8 +127,13 @@ function initApp() {
 }
 
 function initBlogFilter() {
+    console.log("initBlogFilter() is running!"); // וודא שהפונקציה הזו נקראת
     const postsContainer = document.querySelector<HTMLElement>('.blog-post-list-container');
-    if (!postsContainer) return;
+    if (!postsContainer) {
+        console.log("No .blog-post-list-container found. Skipping blog filter.");
+        return;
+    }
+    console.log("Found blog posts container.");
 
     const filterStatusContainer = document.createElement('div');
     filterStatusContainer.className = 'blog-filter-status';
@@ -146,41 +165,4 @@ function initBlogFilter() {
             const activeLink = document.querySelector<HTMLAnchorElement>(`.blog-sidebar a[href$="${hash}"]`);
             if(activeLink) activeLink.classList.add('active-filter');
 
-            const typeText = filterType === 'category' ? 'קטגוריה' : 'תגית';
-            filterStatusContainer.innerHTML = `
-                <h2>מציג מאמרים ב${typeText}: ${filterTerm}</h2>
-                <a href="approach.html" class="clear-filter-btn">נקה סינון והצג הכל</a>
-            `;
-
-            let hasVisiblePost = false;
-            posts.forEach(post => {
-                const dataAttribute = filterType === 'category' ? post.dataset.categories : post.dataset.tags;
-                const terms = dataAttribute ? dataAttribute.split(',').map(t => t.trim()) : [];
-
-                if (terms.includes(filterTerm)) {
-                    post.style.display = 'flex';
-                    hasVisiblePost = true;
-                } else {
-                    post.style.display = 'none';
-                }
-            });
-
-            if (!hasVisiblePost) {
-                filterStatusContainer.innerHTML += `<p>לא נמצאו מאמרים התואמים את הסינון.</p>`;
-            }
-
-        } catch (e) {
-            console.error("Error decoding hash:", e);
-            posts.forEach(post => post.style.display = 'flex');
-        }
-    };
-
-    window.addEventListener('hashchange', filterPosts);
-    filterPosts(); // Initial run
-}
-
-// Call initApp and initBlogFilter when the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', () => {
-    initApp();
-    initBlogFilter();
-});
+            const typeText = filterType === 'category' ? 'קטגוריה' : 'ת
