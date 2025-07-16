@@ -1,18 +1,18 @@
 /* Reset & General Setup */
 :root {
-    /* Updated Color Palette: "שלווה מקצועית" */
-    --primary-color: #2C3E50; /* כחול כהה / כחול-אפור עמוק - לאלמנטים ראשיים, כותרות */
-    --secondary-color: #457B9D; /* כחול בינוני/ירקרק-אפרפר - לאלמנטים משניים, קישורים */
-    --accent-color: #759B7F; /* ירוק עמוק/מרווה - לכפתורי קריאה לפעולה, הדגשות */
-    --text-color: #7F8C8D; /* אפור חם - לטקסט רגיל */
+    /* Updated Color Palette: "ארצית ומרגיעה" */
+    --primary-color: #2D4B2D; /* ירוק כהה עמוק - לאלמנטים ראשיים, כותרות */
+    --secondary-color: #8B8C7A; /* חום אפרפר / חום-ירוק - לאלמנטים משניים, קישורים */
+    --accent-color: #BB764C; /* כתום-חלודה / חום-אדמדם - לכפתורי קריאה לפעולה, הדגשות */
+    --text-color: #5C5C5C; /* אפור-חום כהה - לטקסט רגיל */
     --light-text-color: #fff; /* לבן - לטקסט על רקעים כהים */
-    --background-color: #F4F1DE; /* בז' בהיר / קרם - לרקע ראשי */
-    --light-background-color: #FDFBF6; /* קרם מעט בהיר יותר לווריאציות עדינות */
+    --background-color: #F8F6F4; /* קרם בהיר / לבן מלוכלך - לרקע ראשי */
+    --light-background-color: #FFFFFF; /* לבן נקי לרקעים של כרטיסים/אקורדיון */
 
-    /* New variables mapped to the "שלווה מקצועית" palette */
+    /* New variables mapped to the "ארצית ומרגיעה" palette */
     --contrast-color: var(--primary-color); /* ממופה לצבע ראשי */
     --heading-color: var(--primary-color); /* ממופה לצבע ראשי */
-    --light-accent-bg: color-mix(in srgb, var(--background-color) 90%, white); /* רקע בהיר יותר, נגזר מהרקע הראשי */
+    --light-accent-bg: color-mix(in srgb, var(--background-color) 95%, black); /* רקע בהיר יותר, נגזר מהרקע הראשי */
     --border-color: color-mix(in srgb, var(--text-color) 20%, white); /* גבול על בסיס צבע טקסט */
 
     --font-main: 'Heebo', sans-serif;
@@ -42,7 +42,7 @@ a {
 }
 a:hover {
     text-decoration: underline;
-    color: var(--primary-color); /* כחול כהה יותר בריחוף */
+    color: var(--primary-color); /* ירוק כהה יותר בריחוף */
 }
 a:active, a:hover {
     outline: 0;
@@ -441,11 +441,13 @@ h2.fl-heading .fl-heading-text {
     text-align: center;
 }
 
-.intro-image-col img {
+/* Added rule to target the specific class name from your HTML for the profile image */
+.intro-image-col img,
+.amireyal_profile\.webp img { /* שימו לב ל-`\.` כדי לברוח מנקודה בשם המחלקה */
     width: 220px;
     height: 220px;
     object-fit: cover;
-    border-radius: 50%;
+    border-radius: 50%; /* זהו הכלל שהופך את התמונה לעגולה */
     border: 5px solid #fff;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
@@ -1152,7 +1154,7 @@ h2.fl-heading .fl-heading-text {
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 .cta-form input::placeholder {
-    color: #888;
+    color: color-mix(in srgb, var(--text-color) 50%, white);
 }
 .cta-form input:focus {
     border-color: var(--secondary-color);
