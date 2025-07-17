@@ -313,7 +313,7 @@ ul {
     .navbar-toggle .icon-bar:nth-child(2) {
         top: 9px;
     }
-    .navbar-toggle .icon-child(3) {
+    .navbar-toggle .icon-bar:nth-child(3) {
         top: 15px;
     }
      .navbar-toggle .icon-bar:nth-child(4) {
@@ -1141,55 +1141,41 @@ h2.fl-heading .fl-heading-text {
 /* CTA Section */
 .cta-section-wrapper {
     background-color: var(--primary-color);
-    padding: 4rem 1rem; /* Adjusted from 60px 0 to 4rem 1rem for consistency */
+    padding: 60px 0;
     color: var(--text-color);
-}
-.cta-section-wrapper .container {
-    max-width: 768px; /* Adjusted from 600px to 768px for consistency with previous max-w-3xl */
-    margin-left: auto;
-    margin-right: auto;
 }
 .cta-section-wrapper .cta-content {
     text-align: center;
 }
 .cta-section-wrapper h2 {
     color: var(--light-text-color);
-    font-size: 2.5rem; /* Adjusted from 2.25rem to 2.5rem for consistency */
-    font-weight: 800; /* Added font-extrabold equivalent */
-    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
 }
 .cta-section-wrapper p {
-    font-size: 1.15rem; /* Adjusted from 1.125rem to 1.15rem for consistency */
+    font-size: 1.15rem;
     max-width: 700px;
-    margin: 0 auto 2rem auto; /* Adjusted margin-bottom to 2rem */
+    margin: 0 auto 30px auto;
     opacity: 0.9;
     color: var(--light-text-color);
-}
-.cta-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem; /* Adjusted from 15px to 1rem */
-    max-width: 600px;
-    margin: 0 auto;
 }
 .cta-form .form-row {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1rem; /* Adjusted from 15px to 1rem */
+    gap: 15px;
     flex-wrap: wrap;
 }
 .cta-form .form-group {
-    flex: 1 1 calc(50% - 0.5rem); /* Adjusted for 2 columns with 1rem gap */
-    min-width: 280px;
+    flex: 1 1 auto;
 }
 .cta-form input[type="text"],
 .cta-form input[type="email"],
 .cta-form input[type="tel"] {
     width: 100%;
-    padding: 0.75rem; /* Adjusted from 15px to 0.75rem */
-    border-radius: 0.5rem; /* Adjusted from 30px to 0.5rem */
-    border: 1px solid var(--border-color); /* Used variable */
+    padding: 15px;
+    border-radius: 30px;
+    border: 1px solid transparent;
     font-family: var(--font-main);
     font-size: 1rem;
     box-sizing: border-box;
@@ -1207,9 +1193,9 @@ h2.fl-heading .fl-heading-text {
 .cta-form .btn-cta-orange {
     background-color: var(--accent-color);
     color: var(--light-text-color);
-    border-radius: 0.5rem; /* Adjusted from 30px to 0.5rem */
-    padding: 0.75rem 2rem; /* Adjusted from 15px 35px to 0.75rem 2rem */
-    font-size: 1.25rem; /* Adjusted from 1rem to 1.25rem */
+    border-radius: 30px;
+    padding: 15px 35px;
+    font-size: 1rem;
     font-weight: bold;
     border: none;
     cursor: pointer;
@@ -1220,101 +1206,9 @@ h2.fl-heading .fl-heading-text {
 .cta-form .btn-cta-orange:hover {
     background-color: color-mix(in srgb, var(--accent-color) 80%, black);
     box-shadow: var(--shadow-medium);
-    transform: translateY(-2px); /* Adjusted from 1px to -2px for consistency */
+    transform: translateY(1px);
     color: var(--light-text-color);
 }
-
-/* Footer Section */
-.fl-page-footer-wrap {
-    background-color: color-mix(in srgb, var(--primary-color) 90%, black); /* רקע פוטר כהה יותר מהראשי */
-    color: color-mix(in srgb, var(--light-text-color) 80%, black); /* טקסט פוטר בהיר יותר */
-    padding: 3rem 1rem 1.25rem 1rem; /* Adjusted for py-12 px-4 */
-    text-align: center;
-    margin-top: 80px; /* רווח מה-CTA */
-}
-.fl-page-footer-wrap .container {
-    max-width: 1140px; /* max-w-6xl */
-    margin-left: auto;
-    margin-right: auto;
-}
-.footer-main-content {
-    max-width: 800px;
-    margin: 0 auto 2rem; /* mb-8 */
-    padding: 0 1rem; /* px-4 */
-}
-.footer-cta {
-    font-size: 1.875rem; /* text-3xl */
-    font-weight: 700; /* font-bold */
-    margin-bottom: 1rem; /* mb-4 */
-}
-.footer-contact-info {
-    font-size: 1.125rem; /* text-lg */
-    margin-bottom: 1rem; /* mb-4 */
-}
-.footer-contact-info a {
-    color: var(--accent-color); /* text-blue-400 */
-    margin: 0 0.5rem; /* mx-2 */
-    font-size: 1.125rem; /* text-lg - kept consistent with parent */
-    font-weight: bold;
-    transition: color var(--transition-speed);
-}
-.footer-contact-info a:hover {
-    color: var(--light-text-color); /* hover:text-white */
-}
-.footer-address p {
-    font-size: 0.875rem; /* text-base */
-    color: var(--light-text-color); /* text-gray-400 */
-    margin-top: 0.5rem; /* mb-2 */
-}
-.footer-location-info p {
-    font-size: 0.875rem; /* text-sm */
-    color: var(--light-text-color); /* text-gray-400 */
-    margin-top: 0.5rem;
-}
-.footer-bottom-bar {
-    border-top: 1px solid color-mix(in srgb, var(--light-text-color) 20%, transparent); /* border-gray-700 */
-    padding-top: 1.5rem; /* pt-6 */
-    display: flex;
-    flex-direction: column; /* flex-col */
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem; /* gap-4 */
-}
-.footer-nav-links {
-    margin-bottom: 1rem; /* mb-4 */
-}
-.footer-nav-links a {
-    color: var(--light-text-color); /* text-white */
-    margin: 0 0.5rem; /* mx-2 */
-    transition: color var(--transition-speed);
-}
-.footer-nav-links a:hover {
-    color: var(--secondary-color); /* hover:underline */
-}
-.footer-social-links {
-    font-size: 1.5rem; /* text-2xl */
-}
-.footer-social-links a {
-    color: var(--light-text-color); /* text-white */
-    margin: 0 0.5rem; /* mx-2 */
-    font-size: 1.3rem; /* Adjusted for icon size */
-    transition: color var(--transition-speed);
-}
-.footer-social-links a:hover.fa-facebook-f {
-    color: #3b82f6; /* hover:text-blue-500 */
-}
-.footer-social-links a:hover.fa-instagram {
-    color: #ec4899; /* hover:text-pink-500 */
-}
-.footer-social-links a:hover.fa-envelope {
-    color: #ef4444; /* hover:text-red-500 */
-}
-.fl-page-footer-text {
-    font-size: 0.75rem; /* text-xs */
-    color: var(--light-text-color); /* text-gray-500 */
-    margin-top: 1.5rem; /* mt-6 */
-}
-
 
 /* Responsive Adjustments */
 @media (max-width: 991.98px) {
@@ -1337,11 +1231,12 @@ h2.fl-heading .fl-heading-text {
     .service-card {
         width: auto; /* Let grid handle width */
     }
+    /* Reverted CTA form row to previous state */
     .cta-form .form-row {
         flex-direction: row;
     }
     .cta-form .form-group {
-        flex: 1 1 calc(33.333% - 1rem); /* Three columns on larger screens */
+        flex: 1 1 auto; /* Reverted to auto flex basis */
     }
     .footer-bottom-bar {
         flex-direction: row;
