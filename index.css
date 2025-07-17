@@ -1,21 +1,27 @@
 /* Reset & General Setup */
 :root {
-    --primary-color: #2C3E50; /* Dark Teal/Greenish-Black from new palette */
-    --secondary-color: #A6D9B9; /* Light Green/Mint from new palette */
-    --contrast-color: #2C3E50; /* Mapped from new primary */
-    --heading-color: #2C3E50; /* Mapped from new primary */
-    --light-accent-bg: #F0F8F5; /* Very light greenish-white from new palette */
-    --border-color: #ddd; /* Kept as is, can be adjusted if needed */
-    --text-color: #333; /* Kept as is, can be adjusted if needed */
-    --light-text-color: #fff; /* Kept as is, for text on dark backgrounds */
+    /* Updated Color Palette: "מודרנית ונקייה" */
+    --primary-color: #34495E; /* כחול-אפור כהה - לאלמנטים ראשיים, כותרות */
+    --secondary-color: #95A5A6; /* אפור בהיר-בינוני - לאלמנטים משניים, קישורים */
+    --accent-color: #2ECC71; /* ירוק בהיר תוסס - לכפתורי קריאה לפעולה, הדגשות */
+    --text-color: #2C3E50; /* כחול כהה מאוד - לטקסט רגיל */
+    --light-text-color: #fff; /* לבן - לטקסט על רקעים כהים */
+    --background-color: #ECF0F1; /* אפור בהיר מאוד / לבן כמעט - לרקע ראשי */
+    --light-background-color: #FFFFFF; /* לבן נקי לרקעים של כרטיסים/אקורדיון */
+
+    /* New variables mapped to the "מודרנית ונקייה" palette */
+    --contrast-color: var(--primary-color); /* ממופה לצבע ראשי */
+    --heading-color: var(--primary-color); /* ממופה לצבע ראשי */
+    --light-accent-bg: color-mix(in srgb, var(--background-color) 95%, black); /* רקע בהיר יותר, נגזר מהרקע הראשי */
+    --border-color: color-mix(in srgb, var(--text-color) 20%, white); /* גבול על בסיס צבע טקסט */
+
+    /* New variables for consistent styling */
+    --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08); /* צל קל לאלמנטים */
+    --shadow-medium: 0 8px 20px rgba(0, 0, 0, 0.12); /* צל בינוני לריחוף */
+    --transition-speed: 0.3s ease-in-out; /* מהירות מעבר אחידה */
+
     --font-main: 'Heebo', sans-serif;
     --font-secondary: 'Open Sans', sans-serif;
-
-    /* New/Updated variables for consistent styling */
-    --card-border-radius: 12px; /* Slightly more rounded for a softer look */
-    --button-border-radius: 30px; /* More rounded for buttons */
-    --subtle-shadow: 0 6px 16px rgba(0,0,0,0.08); /* Enhanced subtle shadow */
-    --medium-shadow: 0 12px 28px rgba(0,0,0,0.15); /* Enhanced medium shadow for depth */
 }
 
 html {
@@ -28,20 +34,21 @@ body {
     margin: 0;
     font-family: var(--font-main);
     color: var(--text-color);
-    background-color: #fff;
+    background-color: var(--background-color); /* שימוש במשתנה */
     line-height: 1.6;
     direction: rtl;
+    overflow-x: hidden; /* מניעת גלילה אופקית */
 }
 
 a {
-    color: var(--primary-color);
+    color: var(--secondary-color); /* שימוש בצבע משני לקישורים */
     text-decoration: none;
     background-color: transparent;
-    transition: color 0.3s;
+    transition: color var(--transition-speed); /* מעבר חלק לצבע */
 }
 a:hover {
     text-decoration: underline;
-    color: var(--secondary-color);
+    color: var(--primary-color); /* כחול-אפור כהה יותר בריחוף */
 }
 a:active, a:hover {
     outline: 0;
@@ -52,7 +59,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
     margin-top: 0;
     margin-bottom: 0.5em;
-    color: var(--heading-color);
+    color: var(--heading-color); /* כותרות ראשיות משתמשות בצבע כותרת */
 }
 h1 { font-size: 2.5rem; }
 h2 { font-size: 2rem; }
@@ -100,22 +107,13 @@ ul {
 
 /* Header */
 .fl-page-header {
-    background: transparent; /* Changed to transparent for hero overlay */
-    border-bottom: none; /* Removed border */
+    background: var(--light-background-color); /* רקע בהיר לכותרת */
+    border-bottom: 1px solid var(--border-color); /* גבול עדין */
     z-index: 1000;
-    position: absolute; /* Changed to absolute to overlay hero */
+    position: sticky;
     top: 0;
-    left: 0;
-    width: 100%;
-    box-shadow: none; /* Removed shadow for transparent header */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transition for scroll effect */
-}
-
-/* Class to add via JS when scrolled down */
-.fl-page-header.scrolled {
-    background-color: #fff; /* Solid background when scrolled */
-    border-bottom: 1px solid var(--border-color);
-    box-shadow: var(--subtle-shadow);
+    box-shadow: var(--shadow-light); /* צל קל לכותרת */
+    transition: box-shadow var(--transition-speed); /* מעבר חלק לצל */
 }
 
 .fl-page-header-wrap {
@@ -134,46 +132,26 @@ ul {
 .fl-logo-custom .fl-logo-main {
     font-size: 28px;
     font-weight: 700;
-    color: var(--light-text-color); /* Changed to light text for hero overlay */
+    color: var(--heading-color); /* שימוש בצבע כותרת */
     display: block;
     line-height: 1.2;
-    transition: color 0.3s ease;
 }
-.fl-page-header.scrolled .fl-logo-custom .fl-logo-main {
-    color: var(--heading-color); /* Back to dark when scrolled */
-}
-
 .fl-logo-custom .fl-logo-sub {
     font-size: 14px;
-    color: rgba(255,255,255,0.8); /* Light text for hero overlay */
+    color: color-mix(in srgb, var(--text-color) 80%, black); /* צבע כהה יותר לפרטי לוגו משניים */
     display: block;
-    transition: color 0.3s ease;
 }
-.fl-page-header.scrolled .fl-logo-custom .fl-logo-sub {
-    color: #777; /* Back to original when scrolled */
-}
-
 
 .fl-page-header-text {
     text-align: left;
     font-size: 14px;
-    color: var(--light-text-color); /* Changed to light text for hero overlay */
-    transition: color 0.3s ease;
-}
-.fl-page-header.scrolled .fl-page-header-text {
-    color: var(--text-color); /* Back to dark when scrolled */
 }
 .fl-page-header-text span {
     font-weight: bold;
     display: block;
-    color: var(--light-text-color); /* Changed to light text for hero overlay */
+    color: var(--text-color); /* שימוש בצבע טקסט */
     margin-bottom: 5px;
-    transition: color 0.3s ease;
 }
-.fl-page-header.scrolled .fl-page-header-text span {
-    color: var(--text-color); /* Back to dark when scrolled */
-}
-
 
 .header-contact-methods {
     display: flex;
@@ -188,26 +166,23 @@ ul {
     align-items: center;
     gap: 8px;
     font-weight: bold;
-    color: var(--light-text-color); /* Changed to light text for hero overlay */
-    transition: color 0.3s ease;
-}
-.fl-page-header.scrolled .header-contact-methods a {
-    color: var(--text-color); /* Back to dark when scrolled */
+    color: var(--text-color); /* שימוש בצבע טקסט */
+    transition: color var(--transition-speed); /* מעבר חלק לצבע */
 }
 
 .header-contact-methods a:hover {
-    color: var(--secondary-color);
+    color: var(--secondary-color); /* שימוש בצבע משני בריחוף */
     text-decoration: none;
 }
 
 .header-contact-methods a i {
-    color: var(--secondary-color);
+    color: var(--secondary-color); /* אייקונים משתמשים בצבע משני */
     font-size: 16px;
 }
 
 /* Navigation */
 .fl-page-nav-wrap {
-    background: transparent; /* Changed to transparent for hero overlay */
+    background: var(--primary-color); /* רקע ניווט משתמש בצבע ראשי */
 }
 .navbar-default {
     border: none;
@@ -231,41 +206,37 @@ ul {
 }
 
 .navbar-nav .nav-item .nav-link {
-    color: var(--light-text-color); /* Changed to light text for hero overlay */
+    color: var(--light-text-color);
     padding: 15px 20px;
     font-size: 16px;
     font-weight: 400;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color var(--transition-speed); /* מעבר חלק לרקע */
     display: block;
 }
-.fl-page-header.scrolled .navbar-nav .nav-item .nav-link {
-    color: var(--text-color); /* Back to dark when scrolled */
-}
-
 
 .navbar-nav .nav-item.current-menu-item .nav-link,
 .navbar-nav .nav-item .nav-link:hover {
-    background-color: rgba(255,255,255,0.1);
+    background-color: rgba(255,255,255,0.15); /* רקע בולט יותר בריחוף */
     text-decoration: none;
 }
 
 .fl-nav-button {
-    background-color: var(--secondary-color);
+    background-color: var(--accent-color); /* כפתור קריאה לפעולה משתמש בצבע מבטא */
     color: var(--light-text-color);
     padding: 10px 25px;
-    border-radius: var(--button-border-radius); /* Applied new variable */
+    border-radius: 5px;
     font-weight: bold;
     align-self: center;
-    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s, transform 0.3s; /* Added transform transition */
+    transition: background-color var(--transition-speed), color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed); /* מעברים חלקים */
     white-space: nowrap;
-    box-shadow: var(--subtle-shadow); /* Added subtle shadow */
+    box-shadow: var(--shadow-light); /* צל לכפתור */
 }
 .fl-nav-button:hover {
-    background-color: #8bb9bc; /* Adjusted hover color for new secondary */
+    background-color: color-mix(in srgb, var(--accent-color) 80%, black); /* מעט כהה יותר בריחוף */
     color: var(--light-text-color);
     text-decoration: none;
-    box-shadow: var(--medium-shadow); /* Enhanced shadow on hover */
-    transform: translateY(-2px); /* Slight lift on hover */
+    transform: translateY(-2px); /* אפקט הרמה קל */
+    box-shadow: var(--shadow-medium); /* צל עמוק יותר בריחוף */
 }
 
 .navbar-toggle { display: none; }
@@ -297,11 +268,6 @@ ul {
       overflow: hidden;
     }
 
-    .fl-page-header {
-        background-color: var(--primary-color); /* Solid background for mobile header */
-        position: sticky; /* Back to sticky for mobile */
-        box-shadow: var(--subtle-shadow);
-    }
     .fl-page-header-row {
         flex-direction: column;
         align-items: center;
@@ -314,16 +280,6 @@ ul {
         justify-content: center;
         gap: 10px 15px;
     }
-    /* Ensure mobile header text is light */
-    .fl-page-header .fl-logo-custom .fl-logo-main,
-    .fl-page-header .fl-logo-custom .fl-logo-sub,
-    .fl-page-header .fl-page-header-text,
-    .fl-page-header .fl-page-header-text span,
-    .fl-page-header .header-contact-methods a,
-    .fl-page-header .navbar-nav .nav-item .nav-link {
-        color: var(--light-text-color);
-    }
-
 
     .navbar-toggle {
         display: block;
@@ -338,7 +294,7 @@ ul {
         position: relative;
         width: 36px;
         height: 36px;
-        transition: opacity 0.3s;
+        transition: opacity var(--transition-speed); /* מעבר חלק */
         cursor: pointer;
     }
 
@@ -348,16 +304,26 @@ ul {
         width: 22px;
         display: block;
         margin: 4px auto;
-        transition: all 0.3s ease-in-out;
+        transition: all var(--transition-speed) ease-in-out; /* מעבר חלק */
         position: absolute;
         left: 6px;
         transform-origin: center;
     }
 
     .navbar-toggle .icon-bar:nth-child(2) {
-        transform: translateY(6px) rotate(45deg);
+        top: 9px;
     }
     .navbar-toggle .icon-bar:nth-child(3) {
+        top: 15px;
+    }
+     .navbar-toggle .icon-bar:nth-child(4) {
+        top: 21px;
+    }
+    
+    .navbar-toggle.is-active .icon-bar:nth-child(2) {
+        transform: translateY(6px) rotate(45deg);
+    }
+    .navbar-toggle.is-active .icon-bar:nth-child(3) {
         opacity: 0;
     }
     .navbar-toggle.is-active .icon-bar:nth-child(4) {
@@ -378,7 +344,7 @@ ul {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        transition: opacity 0.3s, visibility 0.3s;
+        transition: opacity var(--transition-speed), visibility var(--transition-speed); /* מעבר חלק */
         padding: 20px;
         box-sizing: border-box;
     }
@@ -422,33 +388,20 @@ ul {
     background-size: cover;
     background-position: center center;
     position: relative;
-    padding: 80px 0; /* Default padding for other pages (approx 1/3 height) */
+    padding: 120px 0;
     color: var(--light-text-color);
     text-align: center;
-    background-attachment: fixed; /* Added for parallax effect */
-    display: flex; /* Use flexbox to center content vertically */
-    align-items: center; /* Center content vertically */
-    justify-content: center; /* Center content horizontally */
-    min-height: 40vh; /* Default min-height for other pages */
 }
-
-/* Specific styling for the homepage hero */
-.home-page-hero { /* New class for homepage hero */
-    min-height: 100vh; /* Full screen height for homepage */
-    padding: 120px 0; /* Original padding for homepage hero content */
-}
-
 .fl-row-bg-overlay::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.55); /* מעט כהה יותר לשכבת על */
     z-index: 1;
 }
 .fl-row-content-wrap {
     position: relative;
     z-index: 2;
-    width: 100%; /* Ensure content takes full width within flex container */
 }
 h1.fl-heading { color: #fff; }
 .fl-heading .fl-heading-text {
@@ -500,13 +453,15 @@ h2.fl-heading .fl-heading-text {
     text-align: center;
 }
 
-.intro-image-col img {
+/* Added rule to target the specific class name from your HTML for the profile image */
+.intro-image-col img,
+.amireyal_profile\.webp img { /* שימו לב ל-`\.` כדי לברוח מנקודה בשם המחלקה */
     width: 220px;
     height: 220px;
     object-fit: cover;
-    border-radius: 50%;
-    border: 5px solid #fff;
-    box-shadow: var(--medium-shadow); /* Applied medium shadow */
+    border-radius: 50%; /* זהו הכלל שהופך את התמונה לעגולה */
+    border: 5px solid var(--light-background-color); /* גבול בהיר סביב התמונה */
+    box-shadow: var(--shadow-medium); /* צל עמוק יותר לתמונה */
 }
 
 .intro-text-col {
@@ -530,7 +485,7 @@ h2.fl-heading .fl-heading-text {
     font-weight: bold;
     text-decoration: none;
     color: var(--primary-color);
-    transition: color 0.3s;
+    transition: color var(--transition-speed); /* מעבר חלק לצבע */
     border-bottom: 2px solid var(--secondary-color);
     padding-bottom: 2px;
     display: inline-block;
@@ -545,34 +500,33 @@ h2.fl-heading .fl-heading-text {
 
 /* Home - Services Overview */
 .services-cards-container {
-    display: flex;
-    justify-content: center; /* Center items when not filling a full row */
-    gap: 30px;
-    flex-wrap: wrap;
+    display: grid; /* שינוי לפריסת גריד */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 3 עמודות רספונסיביות */
+    gap: 30px; /* שמירת רווח קיים */
+    justify-content: center; /* שמירה על יישור למרכז אם אין מספיק פריטים למילוי שורה */
 }
 .service-card {
-    flex: 1;
-    min-width: 280px;
-    max-width: 350px; /* Kept for smaller desktop screens if needed, but flex-basis will dominate */
+    /* הסרת כללי flex: 1, min-width, max-width שנוגדים את הגריד */
     text-align: center;
     padding: 30px 20px;
     border: 1px solid var(--border-color);
-    border-radius: var(--card-border-radius); /* Applied new variable */
-    background: #fff;
-    box-shadow: var(--subtle-shadow); /* Applied subtle shadow */
+    border-radius: 8px; /* פינות מעוגלות יותר */
+    background: var(--light-background-color);
+    box-shadow: var(--shadow-light); /* צל קל לכרטיס */
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed); /* מעברים חלקים */
     display: flex;
     flex-direction: column;
-    transition: transform 0.4s ease, box-shadow 0.4s ease; /* Enhanced transition */
 }
-.service-card:hover { /* Added hover effect for cards */
-    transform: translateY(-8px) scale(1.02); /* More pronounced lift and slight scale */
-    box-shadow: var(--medium-shadow);
+.service-card:hover {
+    transform: translateY(-5px); /* אפקט הרמה קל בריחוף */
+    box-shadow: var(--shadow-medium); /* צל עמוק יותר בריחוף */
 }
 .service-card img {
-    max-width: 80px;
-    height: 80px;
+    max-width: 100%; /* התמונה תמלא את רוחב הכרטיס */
+    height: 120px; /* גובה קבוע שנועד לייצג כשליש מגובה כרטיס ממוצע */
+    object-fit: cover; /* התמונה תכסה את כל השטח המוקצה */
     margin: 0 auto 15px auto;
-    object-fit: contain;
+    display: block; /* לוודא שהתמונה מתנהגת כבלוק */
 }
 .service-card h3 {
     color: var(--heading-color);
@@ -587,22 +541,22 @@ h2.fl-heading .fl-heading-text {
 }
 
 .fl-button {
-    background-color: var(--secondary-color);
+    background-color: var(--accent-color);
     color: var(--light-text-color);
     padding: 12px 25px;
-    border-radius: var(--button-border-radius); /* Applied new variable */
+    border-radius: 5px;
     font-weight: bold;
     display: inline-block;
-    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s, transform 0.3s; /* Added transform transition */
+    transition: background-color var(--transition-speed), color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed); /* מעברים חלקים */
     border: none;
-    box-shadow: var(--subtle-shadow); /* Added subtle shadow */
+    box-shadow: var(--shadow-light); /* צל לכפתור */
 }
 .fl-button:hover {
-    background-color: #8bb9bc; /* Adjusted hover color for new secondary */
+    background-color: color-mix(in srgb, var(--accent-color) 80%, black);
     color: var(--light-text-color);
     text-decoration: none;
-    box-shadow: var(--medium-shadow); /* Enhanced shadow on hover */
-    transform: translateY(-2px); /* Slight lift on hover */
+    transform: translateY(-2px); /* אפקט הרמה קל */
+    box-shadow: var(--shadow-medium); /* צל עמוק יותר בריחוף */
 }
 
 /* Page Content Common Styles */
@@ -619,7 +573,6 @@ h2.fl-heading .fl-heading-text {
 .fl-photo-crop-circle .fl-photo-content img {
     border-radius: 50%;
     max-width: 200px;
-    box-shadow: var(--subtle-shadow); /* Added subtle shadow */
 }
 .fl-col-small { flex: 0 0 250px; }
 
@@ -630,29 +583,27 @@ h2.fl-heading .fl-heading-text {
 }
 
 .audience-cards-container {
-    display: flex;
-    justify-content: center; /* Center items when not filling a full row */
-    gap: 30px;
-    flex-wrap: wrap;
+    display: grid; /* שינוי לפריסת גריד */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 3 עמודות רספונסיביות */
+    gap: 30px; /* שמירת רווח קיים */
+    justify-content: center; /* שמירה על יישור למרכז אם אין מספיק פריטים למילוי שורה */
 }
 
 .audience-card {
-    flex: 1;
-    min-width: 280px;
-    max-width: 350px; /* Kept for smaller desktop screens if needed, but flex-basis will dominate */
+    /* הסרת כללי flex: 1, min-width, max-width שנוגדים את הגריד */
     padding: 30px 25px;
     border: 1px solid var(--border-color);
-    border-radius: var(--card-border-radius); /* Applied new variable */
-    background: #fff;
-    box-shadow: var(--subtle-shadow); /* Applied subtle shadow */
+    border-radius: 8px; /* פינות מעוגלות יותר */
+    background: var(--light-background-color);
+    box-shadow: var(--shadow-light); /* צל קל לכרטיס */
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed); /* מעברים חלקים */
     display: flex;
     flex-direction: column;
     text-align: right;
-    transition: transform 0.4s ease, box-shadow 0.4s ease; /* Enhanced transition */
 }
-.audience-card:hover { /* Added hover effect for cards */
-    transform: translateY(-8px) scale(1.02); /* More pronounced lift and slight scale */
-    box-shadow: var(--medium-shadow);
+.audience-card:hover {
+    transform: translateY(-5px); /* אפקט הרמה קל בריחוף */
+    box-shadow: var(--shadow-medium); /* צל עמוק יותר בריחוף */
 }
 
 .audience-card h3 {
@@ -708,7 +659,7 @@ h2.fl-heading .fl-heading-text {
 }
 .content-section ul li::before {
     content: '✓';
-    color: var(--primary-color);
+    color: var(--accent-color);
     position: absolute;
     right: 0;
 }
@@ -719,22 +670,20 @@ h2.fl-heading .fl-heading-text {
 }
 .two-col-layout .text-col { flex: 1; }
 .two-col-layout .image-col { flex: 1; max-width: 45%; }
-.two-col-layout .image-col img { max-width: 100%; border-radius: var(--card-border-radius); box-shadow: var(--subtle-shadow);} /* Added border-radius and shadow */
+.two-col-layout .image-col img { max-width: 100%; border-radius: 5px;}
 .highlight-box {
     background-color: var(--light-accent-bg);
     border-right: 5px solid var(--primary-color);
     padding: 30px;
-    border-radius: 0 var(--card-border-radius) var(--card-border-radius) 0; /* Applied new variable */
+    border-radius: 0 8px 8px 0; /* פינות מעוגלות יותר */
     height: 100%;
     box-sizing: border-box;
-    box-shadow: var(--subtle-shadow); /* Added subtle shadow */
 }
 .single-col-with-image img {
     display: block;
     max-width: 250px;
     margin: 30px auto 0;
     border-radius: 50%;
-    box-shadow: var(--subtle-shadow); /* Added subtle shadow */
 }
 .fl-button-center {
     text-align: center;
@@ -748,7 +697,16 @@ h2.fl-heading .fl-heading-text {
 }
 .fl-accordion-item {
     border-bottom: 1px solid var(--border-color);
+    background-color: var(--light-background-color); /* רקע לאקורדיון */
+    margin-bottom: 10px; /* רווח בין פריטי אקורדיון */
+    border-radius: 8px; /* פינות מעוגלות */
+    box-shadow: var(--shadow-light); /* צל קל */
+    transition: box-shadow var(--transition-speed); /* מעבר חלק */
 }
+.fl-accordion-item:hover {
+    box-shadow: var(--shadow-medium); /* צל עמוק יותר בריחוף */
+}
+
 .fl-accordion-button {
     padding: 20px;
     cursor: pointer;
@@ -762,16 +720,17 @@ h2.fl-heading .fl-heading-text {
     background: none;
     text-align: right;
     color: var(--heading-color);
-    transition: background-color 0.3s; /* Added transition */
+    transition: color var(--transition-speed); /* מעבר חלק לצבע */
 }
-.fl-accordion-button:hover { /* Added hover effect */
-    background-color: rgba(0, 77, 64, 0.05);
+.fl-accordion-button:hover {
+    color: var(--secondary-color); /* צבע משני בריחוף */
 }
 .fl-accordion-content {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease-out;
-    background: #fff;
+    transition: max-height 0.4s ease-out; /* מעבר איטי יותר לפתיחה/סגירה */
+    background: var(--light-background-color);
+    border-top: 1px solid var(--border-color); /* גבול עליון לתוכן */
 }
 .fl-accordion-content p {
     padding: 20px;
@@ -780,7 +739,7 @@ h2.fl-heading .fl-heading-text {
 
 /* Blog Page */
 #blog-section {
-    background-color: #fff;
+    background-color: var(--light-background-color);
 }
 
 .blog-filter-status {
@@ -801,15 +760,9 @@ h2.fl-heading .fl-heading-text {
     color: var(--primary-color);
 }
 
-.blog-post-list-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px; /* Consistent gap with other card containers */
-}
-
 .blog-post-list-container article {
-    border-bottom: none; /* Removed individual article border-bottom */
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 40px; /* רווח תחתון בפוסטים */
 }
 
 .blog-post-list-container article:last-of-type {
@@ -817,49 +770,50 @@ h2.fl-heading .fl-heading-text {
 }
 
 .blog-post-item {
-    /* Removed original flex properties for row layout */
-    padding: 20px; /* Internal padding for the card */
-    border: 1px solid var(--border-color);
-    border-radius: var(--card-border-radius);
-    background: #fff;
-    box-shadow: var(--subtle-shadow);
-    display: flex; /* Re-added flex to stack image and content */
-    flex-direction: column; /* Stack image and content vertically */
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    text-decoration: none; /* Ensure link styling is clean */
-    color: var(--text-color); /* Default text color for the card */
+    display: flex;
+    gap: 25px;
+    padding: 40px 0;
+    align-items: flex-start;
+    background-color: var(--light-background-color); /* רקע לפוסט בודד */
+    border-radius: 8px;
+    box-shadow: var(--shadow-light);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    margin-bottom: 20px; /* רווח בין פוסטים */
+    padding: 25px; /* ריפוד פנימי */
 }
-
 .blog-post-item:hover {
-    transform: translateY(-8px) scale(1.02); /* Consistent hover effect with other cards */
-    box-shadow: var(--medium-shadow);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
 }
 
 .blog-post-item-image {
     flex-shrink: 0;
-    width: 100%; /* Image fills the card width */
-    height: 180px; /* Fixed height for consistent image size */
-    object-fit: cover;
-    border-radius: var(--card-border-radius); /* Apply card border radius to image */
-    margin-bottom: 15px; /* Space between image and title */
-    background-color: #333; /* Fallback background for image area */
-    display: flex; /* For centering placeholder text if no image */
+    width: 280px;
+    height: 180px;
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.1rem;
     text-align: center;
-    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    overflow: hidden; /* לוודא שתמונה לא חורגת */
 }
 .blog-post-item-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: var(--card-border-radius);
+    border-radius: 4px;
+    transition: transform 0.5s ease; /* מעבר זום בתמונה */
+}
+.blog-post-item-image:hover img {
+    transform: scale(1.05); /* זום קל בריחוף */
 }
 
 .blog-post-item-content {
     flex: 1;
-    /* Removed previous flex properties that made it a row item */
 }
 
 .blog-post-item-title {
@@ -871,7 +825,7 @@ h2.fl-heading .fl-heading-text {
 .blog-post-item-title a {
     color: var(--heading-color);
     text-decoration: none;
-    transition: color 0.2s;
+    transition: color var(--transition-speed);
 }
 
 .blog-post-item-title a:hover {
@@ -880,7 +834,7 @@ h2.fl-heading .fl-heading-text {
 
 .blog-post-item-excerpt {
     font-size: 1rem;
-    color: #555;
+    color: var(--text-color);
     line-height: 1.7;
     margin: 0;
     flex-grow: 1;
@@ -889,16 +843,16 @@ h2.fl-heading .fl-heading-text {
 
 .blog-post-item-meta {
     font-size: 0.9rem;
-    color: #888;
+    color: var(--text-color);
     margin-top: auto;
 }
 
 
 /* Contact Page */
-#contact-page-container { 
-    padding-top: 60px; 
-    padding-bottom: 60px; 
-    background-color: #fff; 
+#contact-page-container {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    background-color: var(--background-color);
 }
 
 #contact-page-container .fl-row-content.fl-row-fixed-width {
@@ -920,10 +874,10 @@ h2.fl-heading .fl-heading-text {
 .contact-profile-badge {
     display: inline-flex;
     align-items: center;
-    background-color: #fff;
-    border-radius: var(--button-border-radius); /* Applied new variable */
+    background-color: var(--light-background-color);
+    border-radius: 50px;
     padding: 8px 20px 8px 8px;
-    box-shadow: var(--subtle-shadow); /* Applied subtle shadow */
+    box-shadow: var(--shadow-light); /* צל קל לתגית */
     direction: rtl;
 }
 
@@ -950,7 +904,7 @@ h2.fl-heading .fl-heading-text {
 .contact-intro {
     font-size: 1.1rem;
     line-height: 1.7;
-    color: #555;
+    color: var(--text-color);
     max-width: 650px;
     margin: 0 auto 30px auto;
 }
@@ -969,11 +923,12 @@ h2.fl-heading .fl-heading-text {
 }
 
 #contact-page-container .contact-details-list a {
-    color: #444;
+    color: var(--text-color);
     font-size: 1.1rem;
     font-weight: 500;
     display: inline-flex;
     align-items: center;
+    transition: color var(--transition-speed); /* מעבר חלק לצבע */
 }
 
 #contact-page-container .contact-details-list a:hover {
@@ -983,16 +938,17 @@ h2.fl-heading .fl-heading-text {
 
 #contact-page-container .contact-details-list i {
     color: var(--secondary-color);
+    margin-left: 10px;
     font-size: 20px;
 }
 
 .contact-form-container {
     background-color: var(--light-accent-bg);
     padding: 40px;
-    border-radius: var(--card-border-radius); /* Applied new variable */
+    border-radius: 8px;
     text-align: right;
     margin-top: 30px;
-    box-shadow: var(--subtle-shadow); /* Added subtle shadow */
+    box-shadow: var(--shadow-light); /* צל קל לטופס */
 }
 
 .contact-form-container .form-group {
@@ -1012,16 +968,16 @@ h2.fl-heading .fl-heading-text {
     width: 100%;
     padding: 12px;
     border: 1px solid var(--border-color);
-    border-radius: 4px; /* Kept slightly less rounded for inputs */
+    border-radius: 4px;
     box-sizing: border-box;
     background-color: #fff;
-    transition: border-color .3s, box-shadow .3s;
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed); /* מעברים חלקים */
 }
 
 .contact-form-container input:focus,
 .contact-form-container textarea:focus {
     border-color: var(--contrast-color);
-    box-shadow: 0 0 0 2px rgba(0, 77, 64, 0.2);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--contrast-color) 30%, transparent);
     outline: none;
 }
 
@@ -1029,43 +985,48 @@ h2.fl-heading .fl-heading-text {
     width: 100%;
     padding: 15px;
     font-size: 16px;
-    background-color: var(--secondary-color);
+    background-color: var(--accent-color);
     border: none;
     color: var(--light-text-color);
+    box-shadow: var(--shadow-light); /* צל לכפתור */
 }
 .contact-form-container .fl-button:hover {
-    background-color: #8bb9bc; /* Adjusted hover color for new secondary */
+    background-color: color-mix(in srgb, var(--accent-color) 80%, black);
     color: var(--light-text-color);
+    transform: translateY(-2px); /* אפקט הרמה קל */
+    box-shadow: var(--shadow-medium); /* צל עמוק יותר בריחוף */
 }
 
 
 /* Footer */
 .fl-page-footer-wrap {
-    background-color: #2b2b2b;
-    color: #a9a9a9;
+    background-color: color-mix(in srgb, var(--primary-color) 90%, black); /* רקע פוטר כהה יותר מהראשי */
+    color: color-mix(in srgb, var(--light-text-color) 80%, black); /* טקסט פוטר בהיר יותר */
     padding: 50px 0 20px 0;
     text-align: center;
+    margin-top: 80px; /* רווח מה-CTA */
 }
 .footer-cta {
     font-size: 1.5rem;
-    color: #fff;
+    color: var(--light-text-color);
 }
 .footer-contact-info a {
-    color: var(--secondary-color);
+    color: var(--accent-color); /* קישורי יצירת קשר בפוטר משתמשים בצבע מבטא */
     margin: 0 15px;
     font-size: 1.25rem;
     font-weight: bold;
+    transition: color var(--transition-speed); /* מעבר חלק לצבע */
 }
 .footer-contact-info a:hover {
-    color: #fff;
+    color: var(--light-text-color); /* צבע לבן בריחוף */
 }
-.footer-address { margin-top: 15px; font-size: 1.125rem; color: #fff;}
+.footer-address { margin-top: 15px; font-size: 1.125rem; color: var(--light-text-color);}
 .footer-location-info {
     max-width: 600px;
     margin: 15px auto 0;
 }
 .footer-bottom-bar {
-    border-top: 1px solid #444;
+    border-top: 1px solid color-mix(in srgb, var(--light-text-color) 20%, transparent); /* גבול על בסיס צבע טקסט בהיר */
     padding-top: 20px;
     margin-top: 30px;
     display: flex;
@@ -1073,25 +1034,35 @@ h2.fl-heading .fl-heading-text {
     align-items: center;
 }
 .footer-nav-links a {
-    color: #a9a9a9;
+    color: color-mix(in srgb, var(--light-text-color) 80%, black); /* קישורי ניווט בפוטר */
     margin: 0 10px;
+    transition: color var(--transition-speed); /* מעבר חלק לצבע */
+}
+.footer-nav-links a:hover {
+    color: var(--light-text-color); /* צבע לבן בריחוף */
 }
 .footer-social-links a {
-    color: #a9a9a9;
+    color: color-mix(in srgb, var(--light-text-color) 80%, black); /* קישורי מדיה חברתית בפוטר */
     margin: 0 8px;
     font-size: 18px;
+    transition: color var(--transition-speed), transform var(--transition-speed); /* מעבר חלק */
+}
+.footer-social-links a:hover {
+    color: var(--accent-color); /* צבע מבטא בריחוף */
+    transform: translateY(-2px); /* אפקט הרמה קל */
 }
 .fl-page-footer-text {
     margin-top: 30px;
     font-size: 13px;
-    border-top: 1px solid #444;
+    border-top: 1px solid color-mix(in srgb, var(--light-text-color) 20%, transparent); /* גבול על בסיס צבע טקסט בהיר */
     padding-top: 20px;
+    color: color-mix(in srgb, var(--light-text-color) 80%, black); /* טקסט זכויות יוצרים בפוטר */
 }
 
 /* Scroll Down Arrow */
 .scroll-down-arrow {
     position: absolute;
-    bottom: 2%; /* Changed from 5% to 2% to move it lower */
+    bottom: 5%;
     left: 50%;
     transform: translateX(-50%);
     z-index: 3;
@@ -1105,7 +1076,7 @@ h2.fl-heading .fl-heading-text {
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color var(--transition-speed), color var(--transition-speed); /* מעבר חלק */
     animation: bounce-arrow 2s infinite ease-in-out;
 }
 
@@ -1128,23 +1099,12 @@ h2.fl-heading .fl-heading-text {
 }
 
 /* Responsive Adjustments */
-@media (min-width: 992px) {
-    /* Enforce 3 columns for cards on desktop */
-    .service-card,
-    .audience-card,
-    .blog-post-item {
-        flex: 0 0 calc(33.33% - 20px); /* 3 items per row with 30px gap (20px per item) */
-        max-width: none; /* Override previous max-width to allow calculation */
-    }
-
+@media (max-width: 991.98px) {
     .fl-heading .fl-heading-text { font-size: 2.75rem; }
     h2.fl-heading .fl-heading-text { font-size: 1.25rem; }
-    
-    /* Removed specific padding for .home-hero here, relying on min-height and flex centering */
-    /* .home-hero { padding-top: 240px; padding-bottom: 240px; } */
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 767.98px) {
     .fl-row { padding: 40px 0; }
     .fl-heading .fl-heading-text { font-size: 2rem; }
     h2.fl-heading .fl-heading-text { font-size: 1.1rem; }
@@ -1187,8 +1147,8 @@ h2.fl-heading .fl-heading-text {
     
     .blog-post-item {
         flex-direction: column;
+        padding: 20px; /* ריפוד קטן יותר במובייל */
     }
-
     .blog-post-item-image {
         width: 100%;
         height: 200px;
@@ -1211,9 +1171,10 @@ h2.fl-heading .fl-heading-text {
     .footer-bottom-bar { flex-direction: column; gap: 15px; }
 }
 
-@media (max-width: 767px) {
-    .cta-section-wrapper h2 {
-        font-size: 2rem;
+@media (min-width: 992px) {
+    .home-hero {
+        padding-top: 240px;
+        padding-bottom: 240px;
     }
 }
 
@@ -1253,7 +1214,7 @@ h2.fl-heading .fl-heading-text {
 .cta-form input[type="tel"] {
     width: 100%;
     padding: 15px;
-    border-radius: var(--button-border-radius); /* Applied new variable */
+    border-radius: 30px;
     border: 1px solid transparent;
     font-family: var(--font-main);
     font-size: 1rem;
@@ -1262,43 +1223,43 @@ h2.fl-heading .fl-heading-text {
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 .cta-form input::placeholder {
-    color: #888;
+    color: color-mix(in srgb, var(--text-color) 50%, white);
 }
 .cta-form input:focus {
     border-color: var(--secondary-color);
-    box-shadow: 0 0 0 3px rgba(168, 218, 220, 0.5); /* Adjusted shadow color for new secondary */
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--secondary-color) 30%, transparent);
     outline: none;
 }
 .cta-form .btn-cta-orange {
-    background-color: var(--secondary-color);
+    background-color: var(--accent-color);
     color: var(--light-text-color);
-    border-radius: var(--button-border-radius); /* Applied new variable */
+    border-radius: 30px;
     padding: 15px 35px;
     font-size: 1rem;
     font-weight: bold;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s;
+    transition: background-color var(--transition-speed), box-shadow var(--transition-speed), transform var(--transition-speed); /* מעברים חלקים */
     width: 100%;
-    box-shadow: var(--subtle-shadow); /* Applied subtle shadow */
+    box-shadow: var(--shadow-light); /* צל לכפתור */
 }
 .cta-form .btn-cta-orange:hover {
-    background-color: #8bb9bc; /* Adjusted hover color for new secondary */
-    box-shadow: var(--medium-shadow); /* Enhanced shadow on hover */
-    transform: translateY(-2px); /* Slight lift on hover */
+    background-color: color-mix(in srgb, var(--accent-color) 80%, black);
+    box-shadow: var(--shadow-medium);
+    transform: translateY(1px);
     color: var(--light-text-color);
 }
 
 @media (min-width: 992px) {
     .cta-form .form-group {
-        max-width: 280px;
+       max-width: 280px;
     }
     .cta-form .form-group:last-child {
         flex-grow: 0;
         min-width: auto;
     }
-      .cta-form .btn-cta-orange {
-        width: auto;
+     .cta-form .btn-cta-orange {
+       width: auto;
     }
 }
 
@@ -1308,10 +1269,192 @@ h2.fl-heading .fl-heading-text {
         max-width: 400px;
         margin: 0 auto;
     }
-      .cta-form .form-group {
+     .cta-form .form-group {
         width: 100%;
     }
 }
+
+@media (max-width: 767px) {
+    .cta-section-wrapper h2 {
+        font-size: 2rem;
+    }
+}
+
+/* Blog Post Single Page */
+#blog-post-section {
+    background-color: var(--background-color);
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.blog-post-full-content {
+    max-width: 100%;
+}
+
+.blog-post-meta {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 25px;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.blog-post-meta span {
+    display: inline-flex;
+    align-items: center;
+}
+
+.blog-post-meta i {
+    margin-left: 8px;
+    color: var(--secondary-color);
+}
+
+.post-categories a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color var(--transition-speed);
+}
+
+.post-categories a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+.blog-post-body {
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+.blog-post-body h2,
+.blog-post-body h3,
+.blog-post-body h4 {
+    margin-top: 2em;
+    margin-bottom: 1em;
+    line-height: 1.4;
+}
+
+.blog-post-body h2 {
+    font-size: 2rem;
+    border-bottom: 2px solid var(--light-accent-bg);
+    padding-bottom: 0.5em;
+}
+
+.blog-post-body h3 {
+    font-size: 1.6rem;
+}
+
+.blog-post-body h4 {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+}
+
+
+.blog-post-body p {
+    margin-bottom: 1.5em;
+}
+
+.blog-post-body strong {
+    font-weight: 600;
+    color: var(--heading-color);
+}
+
+/* Blog Post Single Page Layout */
+.blog-post-layout-container {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.blog-post-main-content {
+    flex: 1;
+    min-width: 0; /* Prevents flexbox overflow */
+}
+
+.blog-sidebar {
+    flex: 0 0 300px; /* Fixed width sidebar */
+    position: sticky;
+    top: 100px; /* Adjust based on header height */
+}
+
+.sidebar-widget {
+    margin-bottom: 40px;
+    background-color: var(--light-accent-bg);
+    padding: 25px;
+    border-radius: 8px; /* פינות מעוגלות */
+    box-shadow: var(--shadow-light); /* צל קל לווידג'ט */
+}
+
+.sidebar-widget .widget-title {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--secondary-color);
+    color: var(--heading-color);
+}
+
+.sidebar-widget ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-widget ul li {
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+.sidebar-widget ul li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.sidebar-widget ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+    transition: color var(--transition-speed);
+    font-weight: 500;
+}
+
+.sidebar-widget ul li a:hover {
+    color: var(--primary-color);
+}
+
+.sidebar-widget ul li a.active-filter {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+
+.sidebar-widget .tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.sidebar-widget .tag {
+    display: inline-block;
+    background-color: var(--light-background-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all var(--transition-speed);
+}
+
+.sidebar-widget .tag:hover, .sidebar-widget .tag.active-filter {
+    background-color: var(--secondary-color);
+    color: var(--light-text-color);
+    border-color: var(--secondary-color);
+    text-decoration: none;
+}
+
 
 /* Responsive for blog post layout */
 @media (max-width: 991.98px) {
