@@ -134,17 +134,6 @@ ul {
     display: block;
 }
 
-.fl-page-header-text {
-    text-align: left;
-    font-size: 14px;
-}
-.fl-page-header-text span {
-    font-weight: bold;
-    display: block;
-    color: var(--text-color);
-    margin-bottom: 5px;
-}
-
 .header-contact-methods {
     display: flex;
     gap: 15px;
@@ -302,19 +291,9 @@ ul {
     }
 
     .navbar-toggle .icon-bar:nth-child(2) {
-        top: 9px;
-    }
-    .navbar-toggle .icon-bar:nth-child(3) {
-        top: 15px;
-    }
-      .navbar-toggle .icon-bar:nth-child(4) {
-        top: 21px;
-    }
-    
-    .navbar-toggle.is-active .icon-bar:nth-child(2) {
         transform: translateY(6px) rotate(45deg);
     }
-    .navbar-toggle.is-active .icon-bar:nth-child(3) {
+    .navbar-toggle .icon-bar:nth-child(3) {
         opacity: 0;
     }
     .navbar-toggle.is-active .icon-bar:nth-child(4) {
@@ -491,14 +470,14 @@ h2.fl-heading .fl-heading-text {
 /* Home - Services Overview */
 .services-cards-container {
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Center items when not filling a full row */
     gap: 30px;
     flex-wrap: wrap;
 }
 .service-card {
     flex: 1;
     min-width: 280px;
-    max-width: 350px;
+    max-width: 350px; /* Kept for smaller desktop screens if needed, but flex-basis will dominate */
     text-align: center;
     padding: 30px 20px;
     border: 1px solid var(--border-color);
@@ -576,7 +555,7 @@ h2.fl-heading .fl-heading-text {
 
 .audience-cards-container {
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Center items when not filling a full row */
     gap: 30px;
     flex-wrap: wrap;
 }
@@ -584,7 +563,7 @@ h2.fl-heading .fl-heading-text {
 .audience-card {
     flex: 1;
     min-width: 280px;
-    max-width: 350px;
+    max-width: 350px; /* Kept for smaller desktop screens if needed, but flex-basis will dominate */
     padding: 30px 25px;
     border: 1px solid var(--border-color);
     border-radius: var(--card-border-radius); /* Applied new variable */
@@ -746,8 +725,15 @@ h2.fl-heading .fl-heading-text {
     color: var(--primary-color);
 }
 
+.blog-post-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px; /* Consistent gap with other card containers */
+}
+
 .blog-post-list-container article {
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: none; /* Removed individual article border-bottom */
 }
 
 .blog-post-list-container article:last-of-type {
@@ -755,41 +741,49 @@ h2.fl-heading .fl-heading-text {
 }
 
 .blog-post-item {
-    display: flex;
-    gap: 25px;
-    padding: 40px 0;
-    align-items: flex-start;
+    /* Removed original flex properties for row layout */
+    padding: 20px; /* Internal padding for the card */
+    border: 1px solid var(--border-color);
+    border-radius: var(--card-border-radius);
+    background: #fff;
+    box-shadow: var(--subtle-shadow);
+    display: flex; /* Re-added flex to stack image and content */
+    flex-direction: column; /* Stack image and content vertically */
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    text-decoration: none; /* Ensure link styling is clean */
+    color: var(--text-color); /* Default text color for the card */
+}
+
+.blog-post-item:hover {
+    transform: translateY(-8px) scale(1.02); /* Consistent hover effect with other cards */
+    box-shadow: var(--medium-shadow);
 }
 
 .blog-post-item-image {
     flex-shrink: 0;
-    width: 280px;
-    height: 180px;
-    background-color: #333;
-    color: #fff;
-    display: flex;
+    width: 100%; /* Image fills the card width */
+    height: 180px; /* Fixed height for consistent image size */
+    object-fit: cover;
+    border-radius: var(--card-border-radius); /* Apply card border radius to image */
+    margin-bottom: 15px; /* Space between image and title */
+    background-color: #333; /* Fallback background for image area */
+    display: flex; /* For centering placeholder text if no image */
     align-items: center;
     justify-content: center;
     font-size: 1.1rem;
     text-align: center;
-    border-radius: var(--card-border-radius); /* Applied new variable */
-    text-decoration: none;
-    box-shadow: var(--subtle-shadow); /* Added subtle shadow */
-    transition: transform 0.4s ease, box-shadow 0.4s ease; /* Enhanced transition */
-}
-.blog-post-item-image:hover { /* Added hover effect */
-    transform: translateY(-5px) scale(1.01); /* More pronounced lift and slight scale */
-    box-shadow: var(--medium-shadow);
+    color: #fff;
 }
 .blog-post-item-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: var(--card-border-radius); /* Applied new variable */
+    border-radius: var(--card-border-radius);
 }
 
 .blog-post-item-content {
     flex: 1;
+    /* Removed previous flex properties that made it a row item */
 }
 
 .blog-post-item-title {
@@ -1058,12 +1052,25 @@ h2.fl-heading .fl-heading-text {
 }
 
 /* Responsive Adjustments */
-@media (max-width: 991.98px) {
+@media (min-width: 992px) {
+    /* Enforce 3 columns for cards on desktop */
+    .service-card,
+    .audience-card,
+    .blog-post-item {
+        flex: 0 0 calc(33.33% - 20px); /* 3 items per row with 30px gap (20px per item) */
+        max-width: none; /* Override previous max-width to allow calculation */
+    }
+
     .fl-heading .fl-heading-text { font-size: 2.75rem; }
     h2.fl-heading .fl-heading-text { font-size: 1.25rem; }
+    
+    .home-hero {
+        padding-top: 240px;
+        padding-bottom: 240px;
+    }
 }
 
-@media (max-width: 767.98px) {
+@media (max-width: 991.98px) {
     .fl-row { padding: 40px 0; }
     .fl-heading .fl-heading-text { font-size: 2rem; }
     h2.fl-heading .fl-heading-text { font-size: 1.1rem; }
@@ -1130,10 +1137,9 @@ h2.fl-heading .fl-heading-text {
     .footer-bottom-bar { flex-direction: column; gap: 15px; }
 }
 
-@media (min-width: 992px) {
-    .home-hero {
-        padding-top: 240px;
-        padding-bottom: 240px;
+@media (max-width: 767px) {
+    .cta-section-wrapper h2 {
+        font-size: 2rem;
     }
 }
 
@@ -1232,188 +1238,6 @@ h2.fl-heading .fl-heading-text {
         width: 100%;
     }
 }
-
-@media (max-width: 767px) {
-    .cta-section-wrapper h2 {
-        font-size: 2rem;
-    }
-}
-
-/* Blog Post Single Page */
-#blog-post-section {
-    background-color: #fff;
-    padding-top: 60px;
-    padding-bottom: 60px;
-}
-
-.blog-post-full-content {
-    max-width: 100%;
-}
-
-.blog-post-meta {
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--border-color);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px 25px;
-    font-size: 0.9rem;
-    color: #777;
-}
-
-.blog-post-meta span {
-    display: inline-flex;
-    align-items: center;
-}
-
-.blog-post-meta i {
-    color: var(--secondary-color);
-    margin-left: 8px;
-}
-
-.post-categories a {
-    color: #777;
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-.post-categories a:hover {
-    color: var(--primary-color);
-    text-decoration: underline;
-}
-
-.blog-post-body {
-    line-height: 1.8;
-    font-size: 1.1rem;
-    color: #444;
-}
-
-.blog-post-body h2,
-.blog-post-body h3,
-.blog-post-body h4 {
-    margin-top: 2em;
-    margin-bottom: 1em;
-    line-height: 1.4;
-}
-
-.blog-post-body h2 {
-    font-size: 2rem;
-    border-bottom: 2px solid var(--light-accent-bg);
-    padding-bottom: 0.5em;
-}
-
-.blog-post-body h3 {
-    font-size: 1.6rem;
-}
-
-.blog-post-body h4 {
-    font-size: 1.3rem;
-    color: var(--primary-color);
-}
-
-
-.blog-post-body p {
-    margin-bottom: 1.5em;
-}
-
-.blog-post-body strong {
-    font-weight: 600;
-    color: var(--heading-color);
-}
-
-/* Blog Post Single Page Layout */
-.blog-post-layout-container {
-    display: flex;
-    gap: 40px;
-    align-items: flex-start;
-}
-
-.blog-post-main-content {
-    flex: 1;
-    min-width: 0; /* Prevents flexbox overflow */
-}
-
-.blog-sidebar {
-    flex: 0 0 300px; /* Fixed width sidebar */
-    position: sticky;
-    top: 100px; /* Adjust based on header height */
-}
-
-.sidebar-widget {
-    margin-bottom: 40px;
-    background-color: var(--light-accent-bg);
-    padding: 25px;
-    border-radius: var(--card-border-radius); /* Applied new variable */
-    box-shadow: var(--subtle-shadow); /* Added subtle shadow */
-}
-
-.sidebar-widget .widget-title {
-    font-size: 1.25rem;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--secondary-color);
-    color: var(--heading-color);
-}
-
-.sidebar-widget ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.sidebar-widget ul li {
-    margin-bottom: 12px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #e0e0e0;
-}
-.sidebar-widget ul li:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
-
-.sidebar-widget ul li a {
-    text-decoration: none;
-    color: var(--text-color);
-    transition: color 0.2s;
-    font-weight: 500;
-}
-
-.sidebar-widget ul li a:hover {
-    color: var(--primary-color);
-}
-
-.sidebar-widget ul li a.active-filter {
-    font-weight: bold;
-    color: var(--primary-color);
-}
-
-
-.sidebar-widget .tag-cloud {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.sidebar-widget .tag {
-    display: inline-block;
-    background-color: #fff;
-    border: 1px solid var(--border-color);
-    color: #555;
-    padding: 5px 12px;
-    border-radius: var(--button-border-radius); /* Applied new variable */
-    font-size: 0.9rem;
-    text-decoration: none;
-    transition: all 0.2s;
-}
-
-.sidebar-widget .tag:hover, .sidebar-widget .tag.active-filter {
-    background-color: var(--secondary-color);
-    color: #fff;
-    border-color: var(--secondary-color);
-    text-decoration: none;
-}
-
 
 /* Responsive for blog post layout */
 @media (max-width: 991.98px) {
