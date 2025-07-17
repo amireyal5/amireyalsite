@@ -7,8 +7,29 @@
     <title>עמיר אייל - פסיכותרפיה והדרכת הורים בכרמיאל</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Heebo:300,400,700|Open+Sans:400,300">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<link rel="stylesheet" href="index.css">  
-<link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <style>
+        /* CSS for the circular profile image */
+        .profile-image-round {
+            border-radius: 50%; /* Makes the image perfectly circular */
+            width: 200px;      /* Sets a fixed width for the image */
+            height: 200px;     /* Sets a fixed height for the image, matching the width for a perfect circle */
+            object-fit: cover; /* Ensures the image covers the entire area without distortion, cropping if necessary */
+            display: block;    /* Makes the image a block-level element to allow margin auto for centering */
+            margin: 0 auto;    /* Centers the image horizontally within its container */
+            border: 4px solid #A78BFA; /* Adds a purple border around the image for aesthetic appeal */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .profile-image-round {
+                width: 150px; /* Reduces the size of the image on smaller screens */
+                height: 150px;
+            }
+        }
+    </style>
 </head>
 <body class="wp-singular page-template-default page page-id-4 wp-theme-bb-theme wp-child-theme-peaceful fl-builder fl-theme-1-7-18-1 fl-framework-bootstrap fl-preset-peaceful fl-full-width fl-submenu-indicator fl-builder-breakpoint-default" itemscope="itemscope" itemtype="https://schema.org/WebPage">
     <div class="fl-page">
@@ -45,7 +66,6 @@
                             <span class="icon-bar"></span>
                         </button>
                         <div class="fl-page-nav-collapse collapse navbar-collapse" aria-hidden="true">
-                            
                             <ul id="menu-primary-menu" class="nav navbar-nav menu fl-theme-menu">
                                 <li class="nav-item"><a href="index.html" class="nav-link">בית</a></li>
                                 <li class="nav-item"><a href="about.html" class="nav-link">אודות</a></li>
@@ -54,7 +74,7 @@
                                 <li class="nav-item"><a href="faq.html" class="nav-link">שאלות נפוצות</a></li>
                                 <li class="nav-item"><a href="contact.html" class="nav-link">יצירת קשר</a></li>
                             </ul>
-                             <a href="contact.html" class="fl-nav-button">קבע פגישה</a>
+                            <a href="contact.html" class="fl-nav-button">קבע פגישה</a>
                         </div>
                     </nav>
                 </div>
@@ -98,7 +118,8 @@
                         <div class="fl-row-content fl-row-fixed-width">
                             <div class="intro-section-container">
                                 <div class=".intro-image-col img">
-                                    <img src="assets/images/amir.jpg" alt="עמיר אייל - פסיכותרפיסט">
+                                    <!-- תמונת הפרופיל העגולה והמותאמת -->
+                                    <img src="assets/images/amir.jpg" alt="עמיר אייל - פסיכותרפיסט" class="profile-image-round">
                                 </div>
                                 <div class="intro-text-col">
                                     <div class="fl-rich-text">
@@ -211,6 +232,6 @@
         </footer>
     </div>
     <script src="assets/js/main.js" defer></script>
-<script type="module" src="/index.tsx"></script>
+    <script type="module" src="/index.tsx"></script>
 </body>
 </html>
