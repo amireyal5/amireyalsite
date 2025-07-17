@@ -429,7 +429,7 @@ h2.fl-heading .fl-heading-text {
     color: var(--heading-color);
 }
 .fl-row-content.fl-row-fixed-width {
-    max-width: 960px; /* Adjusted to 960px for consistency with previous 6xl equivalent */
+    max-width: 960px;
     margin-left: auto;
     margin-right: auto;
     padding-left: 15px;
@@ -440,65 +440,48 @@ h2.fl-heading .fl-heading-text {
 /* Intro Section on Homepage */
 #intro-section {
     background-color: var(--light-accent-bg);
-    padding-top: 3rem; /* Adjusted from 60px to 3rem for consistency */
-    padding-bottom: 3rem; /* Adjusted from 60px to 3rem for consistency */
-    padding-left: 1rem; /* Added for consistency */
-    padding-right: 1rem; /* Added for consistency */
-}
-
-#intro-section .fl-row-content-wrap {
-    max-width: 1140px; /* Adjusted to 1140px for consistency with .container */
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .intro-section-container {
     display: flex;
-    flex-direction: column; /* Default to column on small screens */
-    align-items: center; /* Center items vertically */
-    gap: 2rem; /* Adjusted from 40px to 2rem for consistency */
+    align-items: center;
+    gap: 40px;
 }
 
 .intro-image-col {
-    flex-shrink: 0; /* flex-shrink-0 */
-    text-align: center; /* Ensure image is centered in its column */
+    flex: 0 0 220px; /* Fixed width for the image column */
+    text-align: center;
 }
 
 /* Added rule to target the specific class name from your HTML for the profile image */
-.intro-image-col img {
-    width: 12rem; /* w-48 */
-    height: 12rem; /* h-48 */
-    object-fit: cover; /* object-cover */
+.intro-image-col img,
+.amireyal_profile\.webp img { /* שימו לב ל-`\.` כדי לברוח מנקודה בשם המחלקה */
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
     border-radius: 50%; /* זהו הכלל שהופך את התמונה לעגולה */
     border: 5px solid var(--light-background-color); /* גבול בהיר סביב התמונה */
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+    box-shadow: var(--shadow-medium); /* צל עמוק יותר לתמונה */
 }
 
 .intro-text-col {
     flex: 1;
     min-width: 300px; /* Ensure it doesn't get too squished */
-    text-align: center; /* Default to center on small screens */
 }
 
 .intro-text-col h2 {
-    font-size: 1.875rem; /* text-3xl */
-    font-weight: 700; /* font-bold */
-    margin-bottom: 1rem; /* mb-4 */
+    font-size: 2rem;
+    margin-bottom: 15px;
     color: var(--heading-color);
 }
 
 .intro-text-col p {
-    font-size: 1.125rem; /* text-lg */
+    font-size: 1.05rem;
     line-height: 1.7;
     margin-bottom: 1rem;
-    color: var(--text-color); /* Ensure text color is from variables */
 }
 
-.intro-text-col p:last-of-type {
-    margin-bottom: 1.5rem; /* mb-6 */
-}
-
-.read-more-link {
+.intro-text-col .read-more-link {
     font-weight: bold;
     text-decoration: none;
     color: var(--primary-color);
@@ -506,97 +489,74 @@ h2.fl-heading .fl-heading-text {
     border-bottom: 2px solid var(--secondary-color);
     padding-bottom: 2px;
     display: inline-block;
-    font-size: 1.125rem; /* text-lg */
-    font-weight: 600; /* font-semibold */
 }
 
-.read-more-link:hover {
+.intro-text-col .read-more-link:hover {
     color: var(--secondary-color);
     border-bottom-color: var(--primary-color);
-    text-decoration: underline; /* Added underline on hover */
+    text-decoration: none;
 }
 
 
 /* Home - Services Overview */
-#services-overview {
-    padding-top: 3rem; /* py-12 */
-    padding-bottom: 3rem; /* py-12 */
-    padding-left: 1rem; /* px-4 */
-    padding-right: 1rem; /* px-4 */
-    background-color: #f9fafb; /* bg-gray-50 - specific color, not in variables */
-}
-
-#services-overview .fl-row-content-wrap {
-    max-width: 1140px; /* max-w-6xl */
-    margin-left: auto; /* mx-auto */
-    margin-right: auto; /* mx-auto */
-}
-
-.section-title {
-    text-align: center;
-    font-size: 2.25rem; /* text-4xl */
-    font-weight: 800; /* font-extrabold */
-    margin-bottom: 2.5rem; /* mb-10 */
-    color: var(--heading-color); /* text-gray-800 */
-}
-
 .services-cards-container {
     display: grid; /* שינוי לפריסת גריד */
-    /* Updated for desktop to ensure 3 columns */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Default for smaller screens, allows wrapping */
-    gap: 1.5rem; /* gap-6 */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 3 עמודות רספונסיביות */
+    gap: 30px; /* שמירת רווח קיים */
     justify-content: center; /* שמירה על יישור למרכז אם אין מספיק פריטים למילוי שורה */
 }
 .service-card {
+    /* הסרת כללי flex: 1, min-width, max-width שנוגדים את הגריד */
     text-align: center;
-    padding: 1.5rem; /* p-6 */
+    padding: 30px 20px;
     border: 1px solid var(--border-color);
-    border-radius: 0.75rem; /* rounded-xl */
+    border-radius: 8px; /* פינות מעוגלות יותר */
     background: var(--light-background-color);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-lg */
-    transition: transform var(--transition-speed), box-shadow var(--transition-speed); /* transform transition duration-300 */
+    box-shadow: var(--shadow-light); /* צל קל לכרטיס */
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed); /* מעברים חלקים */
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 .service-card:hover {
-    transform: scale(1.05); /* hover:scale-105 */
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* hover:shadow-xl */
+    transform: translateY(-5px); /* אפקט הרמה קל בריחוף */
+    box-shadow: var(--shadow-medium); /* צל עמוק יותר בריחוף */
 }
 .service-card img {
-    width: 6rem; /* w-24 */
-    height: 6rem; /* h-24 */
-    object-fit: cover;
-    margin-bottom: 1rem; /* mb-4 */
+    max-width: 100%; /* התמונה תמלא את רוחב הכרטיס */
+    height: 120px; /* גובה קבוע שנועד לייצג כשליש מגובה כרטיס ממוצע */
+    object-fit: cover; /* התמונה תכסה את כל השטח המוקצה */
+    margin: 0 auto 15px auto;
     display: block; /* לוודא שהתמונה מתנהגת כבלוק */
 }
 .service-card h3 {
     color: var(--heading-color);
-    font-size: 1.5rem; /* text-2xl */
-    font-weight: 600; /* font-semibold */
-    margin-bottom: 0.5rem; /* mb-2 */
+    font-size: 1.5rem;
 }
 .service-card p {
     font-size: 1rem;
     flex-grow: 1;
-    color: var(--text-color); /* text-gray-600 */
-    text-align: center;
-    margin-bottom: 1rem; /* mb-4 */
 }
 .service-card .fl-button {
     margin-top: auto;
-    background-color: var(--accent-color); /* bg-blue-600 */
-    color: var(--light-text-color);
-    padding: 0.5rem 1.5rem; /* py-2 px-6 */
-    border-radius: 0.5rem; /* rounded-lg */
-    font-size: 1.125rem; /* text-lg */
-    font-weight: 500; /* font-medium */
-    text-decoration: none;
-    display: inline-block;
-    transition: background-color 0.3s ease-in-out; /* transition duration-300 */
 }
-.service-card .fl-button:hover {
-    background-color: color-mix(in srgb, var(--accent-color) 80%, black); /* hover:bg-blue-700 */
+
+.fl-button {
+    background-color: var(--accent-color);
+    color: var(--light-text-color);
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+    transition: background-color var(--transition-speed), color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed); /* מעברים חלקים */
+    border: none;
+    box-shadow: var(--shadow-light); /* צל לכפתור */
+}
+.fl-button:hover {
+    background-color: color-mix(in srgb, var(--accent-color) 80%, black);
+    color: var(--light-text-color);
+    text-decoration: none;
+    transform: translateY(-2px); /* אפקט הרמה קל */
+    box-shadow: var(--shadow-medium); /* צל עמוק יותר בריחוף */
 }
 
 /* Page Content Common Styles */
@@ -1138,6 +1098,86 @@ h2.fl-heading .fl-heading-text {
     }
 }
 
+/* Responsive Adjustments */
+@media (max-width: 991.98px) {
+    .fl-heading .fl-heading-text { font-size: 2.75rem; }
+    h2.fl-heading .fl-heading-text { font-size: 1.25rem; }
+}
+
+@media (max-width: 767.98px) {
+    .fl-row { padding: 40px 0; }
+    .fl-heading .fl-heading-text { font-size: 2rem; }
+    h2.fl-heading .fl-heading-text { font-size: 1.1rem; }
+    .section-title { font-size: 1.75rem; }
+
+    .home-hero .scroll-down-arrow {
+        display: none;
+    }
+
+    .intro-section-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+    .intro-image-col {
+        flex-basis: auto;
+    }
+    .intro-image-col img {
+        width: 180px;
+        height: 180px;
+    }
+    .intro-text-col h2 {
+        font-size: 1.8rem;
+    }
+
+    #about .fl-col-group,
+    .two-col-layout {
+        flex-direction: column;
+    }
+    #about .fl-col-small { text-align: center; flex-basis: auto; }
+    .two-col-layout .image-col { max-width: 80%; margin: 20px auto 0; }
+    
+    #audience-section {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+    .audience-card {
+        text-align: center;
+    }
+    
+    .blog-post-item {
+        flex-direction: column;
+        padding: 20px; /* ריפוד קטן יותר במובייל */
+    }
+    .blog-post-item-image {
+        width: 100%;
+        height: 200px;
+    }
+
+    .contact-form-container {
+        padding: 20px;
+    }
+
+    #contact-page-container .contact-details-list {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .footer-contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .footer-bottom-bar { flex-direction: column; gap: 15px; }
+}
+
+@media (min-width: 992px) {
+    .home-hero {
+        padding-top: 240px;
+        padding-bottom: 240px;
+    }
+}
+
 /* CTA Section */
 .cta-section-wrapper {
     background-color: var(--primary-color);
@@ -1210,124 +1250,221 @@ h2.fl-heading .fl-heading-text {
     color: var(--light-text-color);
 }
 
-/* Responsive Adjustments */
-@media (max-width: 991.98px) {
-    .fl-heading .fl-heading-text { font-size: 2.75rem; }
-    h2.fl-heading .fl-heading-text { font-size: 1.25rem; }
-}
-
-@media (min-width: 768px) { /* md breakpoint */
-    .intro-section-container {
-        flex-direction: row; /* md:flex-row */
-        align-items: flex-start; /* md:items-start */
-    }
-    .intro-text-col {
-        text-align: right; /* md:text-right */
-    }
-    /* Force 3 columns for services cards on desktop */
-    .services-cards-container {
-        grid-template-columns: repeat(3, 1fr); /* Ensures 3 columns always */
-    }
-    .service-card {
-        width: auto; /* Let grid handle width */
-    }
-    /* Reverted CTA form row to previous state */
-    .cta-form .form-row {
-        flex-direction: row;
-    }
-    .cta-form .form-group {
-        flex: 1 1 auto; /* Reverted to auto flex basis */
-    }
-    .footer-bottom-bar {
-        flex-direction: row;
-    }
-    .footer-nav-links {
-        margin-bottom: 0; /* sm:mb-0 */
-    }
-}
-
-@media (max-width: 767.98px) { /* Small screens, below md breakpoint */
-    .fl-row { padding: 40px 0; }
-    .fl-heading .fl-heading-text { font-size: 2rem; }
-    h2.fl-heading .fl-heading-text { font-size: 1.1rem; }
-    .section-title { font-size: 1.75rem; }
-
-    .home-hero .scroll-down-arrow {
-        display: none;
-    }
-
-    .intro-section-container {
-        flex-direction: column;
-        text-align: center;
-        gap: 20px;
-    }
-    .intro-image-col {
-        flex-basis: auto;
-    }
-    .intro-image-col img {
-        width: 180px;
-        height: 180px;
-    }
-    .intro-text-col h2 {
-        font-size: 1.8rem;
-    }
-
-    #about .fl-col-group,
-    .two-col-layout {
-        flex-direction: column;
-    }
-    #about .fl-col-small { text-align: center; flex-basis: auto; }
-    .two-col-layout .image-col { max-width: 80%; margin: 20px auto 0; }
-    
-    #audience-section {
-        padding-top: 40px;
-        padding-bottom: 40px;
-    }
-    .audience-card {
-        text-align: center;
-    }
-    
-    .blog-post-item {
-        flex-direction: column;
-        padding: 20px; /* ריפוד קטן יותר במובייל */
-    }
-    .blog-post-item-image {
-        width: 100%;
-        height: 200px;
-    }
-
-    .contact-form-container {
-        padding: 20px;
-    }
-
-    #contact-page-container .contact-details-list {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .footer-contact-info {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-    .footer-bottom-bar { flex-direction: column; gap: 15px; }
-}
-
-@media (max-width: 639px) { /* sm breakpoint (below 640px) */
-    .service-card {
-        width: 100%; /* w-full on small screens */
-    }
-    .cta-form .form-row {
-        flex-direction: column;
-    }
-    .cta-form .form-group {
-        flex: 1 1 100%;
-    }
-}
-
 @media (min-width: 992px) {
-    .home-hero {
-        padding-top: 240px;
-        padding-bottom: 240px;
+    .cta-form .form-group {
+       max-width: 280px;
+    }
+    .cta-form .form-group:last-child {
+        flex-grow: 0;
+        min-width: auto;
+    }
+     .cta-form .btn-cta-orange {
+       width: auto;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .cta-form .form-row {
+        flex-direction: column;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+     .cta-form .form-group {
+        width: 100%;
+    }
+}
+
+@media (max-width: 767px) {
+    .cta-section-wrapper h2 {
+        font-size: 2rem;
+    }
+}
+
+/* Blog Post Single Page */
+#blog-post-section {
+    background-color: var(--background-color);
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.blog-post-full-content {
+    max-width: 100%;
+}
+
+.blog-post-meta {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 25px;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.blog-post-meta span {
+    display: inline-flex;
+    align-items: center;
+}
+
+.blog-post-meta i {
+    margin-left: 8px;
+    color: var(--secondary-color);
+}
+
+.post-categories a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color var(--transition-speed);
+}
+
+.post-categories a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+.blog-post-body {
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+.blog-post-body h2,
+.blog-post-body h3,
+.blog-post-body h4 {
+    margin-top: 2em;
+    margin-bottom: 1em;
+    line-height: 1.4;
+}
+
+.blog-post-body h2 {
+    font-size: 2rem;
+    border-bottom: 2px solid var(--light-accent-bg);
+    padding-bottom: 0.5em;
+}
+
+.blog-post-body h3 {
+    font-size: 1.6rem;
+}
+
+.blog-post-body h4 {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+}
+
+
+.blog-post-body p {
+    margin-bottom: 1.5em;
+}
+
+.blog-post-body strong {
+    font-weight: 600;
+    color: var(--heading-color);
+}
+
+/* Blog Post Single Page Layout */
+.blog-post-layout-container {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.blog-post-main-content {
+    flex: 1;
+    min-width: 0; /* Prevents flexbox overflow */
+}
+
+.blog-sidebar {
+    flex: 0 0 300px; /* Fixed width sidebar */
+    position: sticky;
+    top: 100px; /* Adjust based on header height */
+}
+
+.sidebar-widget {
+    margin-bottom: 40px;
+    background-color: var(--light-accent-bg);
+    padding: 25px;
+    border-radius: 8px; /* פינות מעוגלות */
+    box-shadow: var(--shadow-light); /* צל קל לווידג'ט */
+}
+
+.sidebar-widget .widget-title {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--secondary-color);
+    color: var(--heading-color);
+}
+
+.sidebar-widget ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-widget ul li {
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+.sidebar-widget ul li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.sidebar-widget ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+    transition: color var(--transition-speed);
+    font-weight: 500;
+}
+
+.sidebar-widget ul li a:hover {
+    color: var(--primary-color);
+}
+
+.sidebar-widget ul li a.active-filter {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+
+.sidebar-widget .tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.sidebar-widget .tag {
+    display: inline-block;
+    background-color: var(--light-background-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all var(--transition-speed);
+}
+
+.sidebar-widget .tag:hover, .sidebar-widget .tag.active-filter {
+    background-color: var(--secondary-color);
+    color: var(--light-text-color);
+    border-color: var(--secondary-color);
+    text-decoration: none;
+}
+
+
+/* Responsive for blog post layout */
+@media (max-width: 991.98px) {
+    .blog-post-layout-container {
+        flex-direction: column;
+    }
+    .blog-sidebar {
+        flex: 1 1 auto;
+        width: 100%;
+        position: static;
+        margin-top: 40px;
     }
 }
