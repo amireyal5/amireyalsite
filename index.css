@@ -1,13 +1,13 @@
 /* Reset & General Setup */
 :root {
-    --primary-color: #004d40; /* Teal/dark green */
-    --secondary-color: #a8dadc; /* Light blue-green - Updated for a lighter, complementary shade */
-    --contrast-color: #004d40; /* Mapped from primary */
-    --heading-color: #004d40; /* Mapped from primary */
-    --light-accent-bg: #eef3f2;
-    --border-color: #ddd;
-    --text-color: #333;
-    --light-text-color: #fff;
+    --primary-color: #2C3E50; /* Dark Teal/Greenish-Black from new palette */
+    --secondary-color: #A6D9B9; /* Light Green/Mint from new palette */
+    --contrast-color: #2C3E50; /* Mapped from new primary */
+    --heading-color: #2C3E50; /* Mapped from new primary */
+    --light-accent-bg: #F0F8F5; /* Very light greenish-white from new palette */
+    --border-color: #ddd; /* Kept as is, can be adjusted if needed */
+    --text-color: #333; /* Kept as is, can be adjusted if needed */
+    --light-text-color: #fff; /* Kept as is, for text on dark backgrounds */
     --font-main: 'Heebo', sans-serif;
     --font-secondary: 'Open Sans', sans-serif;
 
@@ -1021,7 +1021,7 @@ h2.fl-heading .fl-heading-text {
 /* Scroll Down Arrow */
 .scroll-down-arrow {
     position: absolute;
-    bottom: 5%;
+    bottom: 2%; /* Changed from 5% to 2% to move it lower */
     left: 50%;
     transform: translateX(-50%);
     z-index: 3;
@@ -1267,8 +1267,8 @@ h2.fl-heading .fl-heading-text {
 }
 
 .blog-post-meta i {
-    margin-left: 8px;
     color: var(--secondary-color);
+    margin-left: 8px;
 }
 
 .post-categories a {
